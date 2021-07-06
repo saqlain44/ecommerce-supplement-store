@@ -49,7 +49,7 @@ const products = [
     name: 'Universal Nutrition Glutamine',
     image: '/images/UNIV530108_900x.png',
     description:
-      'Replenish the Body\'s Glutamine Storage* 5g of Glutamine a Serving',
+      "Replenish the Body's Glutamine Storage* 5g of Glutamine a Serving",
     brand: 'UNIVERSAL NUTRITION',
     category: 'glutamine',
     price: 17.99,
@@ -89,6 +89,6 @@ const products = [
     rating: 4,
     numReviews: 12,
   },
-]
+];
 
-export default products
+export default products;

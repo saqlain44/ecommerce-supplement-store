@@ -12,6 +12,12 @@ main {
   object-fit: contain;
 }
 
+.product-image {
+  width: 100% !important;
+  height: 420px !important;
+  object-fit: contain;
+}
+
 .rating span {
   margin: 0.1rem;
 }
@@ -31,7 +37,20 @@ main {
   -webkit-box-orient: vertical;
 }
 
+.btn-block {
+  width: 100% !important;
+}
+
 /* min-height:80px;
 display:flex;
 justify-content:center;
 align-items:center; */
+
+/* Use a media query to add a breakpoint at 800px: */
+@media screen and (max-width: 767px) {
+  .product-image {
+    width: 100% !important;
+    height: 220px !important;
+    object-fit: contain;
+  }
+}
