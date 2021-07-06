@@ -5,3 +5,33 @@ main {
 .nav-right-items {
   margin-left: auto;
 }
+
+.card-img {
+  width: 100% !important;
+  height: 200px !important;
+  object-fit: contain;
+}
+
+.rating span {
+  margin: 0.1rem;
+}
+
+.product-price {
+  padding-top: 1rem;
+}
+
+.card-title {
+  font-size: 19px;
+  min-height: 50px;
+  /* text-overflow: ellipsis; */
+  /* white-space: nowrap; */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* min-height:80px;
+display:flex;
+justify-content:center;
+align-items:center; */
