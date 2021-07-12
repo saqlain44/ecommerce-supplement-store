@@ -8,17 +8,19 @@ import {
   productListReducer,
   productDetailsReducer,
 } from './reducers/productReducers';
+import { cartReducer } from './reducers/cartReducers';
 
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  cart: cartReducer,
 });
 
 // Config for local storage
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [],
+  whitelist: ['cart'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

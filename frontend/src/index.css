@@ -37,6 +37,22 @@ main {
   -webkit-box-orient: vertical;
 }
 
+.shopping-cart-title {
+  /* padding: 0.1rem 0; */
+  padding-bottom: 0.5rem;
+}
+
+.shopping-cart-image {
+  width: 100% !important;
+  height: 110px !important;
+  object-fit: contain;
+}
+
+.shopping-cart-row {
+  padding-top: 0.3rem;
+  margin: 0.3rem 0;
+}
+
 .btn-block {
   width: 100% !important;
 }
