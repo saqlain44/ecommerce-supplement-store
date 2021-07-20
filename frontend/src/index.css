@@ -53,6 +53,10 @@ main {
   margin: 0.3rem 0;
 }
 
+.select-method {
+  font-size: larger;
+}
+
 .btn-block {
   width: 100% !important;
 }
