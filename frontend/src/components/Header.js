@@ -1,8 +1,10 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
+import SearchBox from './SearchBox';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ const Header = () => {
                 <Nav.Link>Performance</Nav.Link>
               </LinkContainer>
             </Nav>
+            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className='ml-auto nav-right-items'>
               <LinkContainer to='/cart'>
                 <Nav.Link>

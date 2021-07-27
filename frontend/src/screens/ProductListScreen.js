@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { Table, Button, Row, Col, Container } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-// import Paginate from '../components/Paginate';
+import Paginate from '../components/Paginate';
 import {
   listProducts,
   deleteProduct,
@@ -75,15 +75,14 @@ const ProductListScreen = ({ history, match }) => {
     <>
       <Row className='align-items-center'>
         <Col>
-          <h3>PRODUCTS</h3>
+          <h2>Products</h2>
         </Col>
-        <Col className='text-end'>
+        <Col className='text-right'>
           <Button className='my-3' onClick={createProductHandler}>
             <i className='fas fa-plus'></i>&nbsp;Create Product
           </Button>
         </Col>
       </Row>
-
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loadingCreate && <Loader />}
@@ -132,7 +131,7 @@ const ProductListScreen = ({ history, match }) => {
               ))}
             </tbody>
           </Table>
-          {/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
+          <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>
