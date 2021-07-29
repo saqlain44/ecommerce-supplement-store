@@ -57,13 +57,14 @@ const ProfileScreen = ({ history }) => {
           password,
         })
       );
+      dispatch(getUserDetails('profile'));
     }
   };
 
   return (
     <Row>
       <Col md={3}>
-        <h4>User Profile</h4>
+        <h4>USER PROFILE</h4>
         {message && <Message>{message}</Message>}
         {error && <Message>{error}</Message>}
         {success && <Message variant='success'>Profile Updated</Message>}
@@ -109,14 +110,14 @@ const ProfileScreen = ({ history }) => {
             ></Form.Control>
           </Form.Group>
 
-          <Button type='submit' variant='primary'>
+          <Button type='submit' variant='primary' className='btn-block'>
             Update
           </Button>
         </Form>
       </Col>
 
       <Col md={9}>
-        <h4>My Orders</h4>
+        <h4>MY ORDERS</h4>
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (

@@ -56,17 +56,27 @@ const productList = [
 
 let store;
 
+const match = { params: { keyword: '' } };
+
 // Jest mock implementation of window.confirm
 global.confirm = () => true;
 
 beforeEach(async () => {
   store = makeTestStore();
 
-  await axios.get.mockResolvedValueOnce({ data: productList });
+  // Product ProductCarousel, it should be at first because it's import form another file
+  await axios.get.mockResolvedValueOnce({
+    data: productList,
+  });
+
+  // All product list
+  await axios.get.mockResolvedValueOnce({
+    data: { products: productList, page: 1, pages: 1 },
+  });
 
   testRender(
     <Router>
-      <HomeScreen />
+      <HomeScreen match={match} />
     </Router>,
     {
       store,
@@ -75,12 +85,12 @@ beforeEach(async () => {
 });
 
 describe('Show all products', () => {
-  it('list all the products', () => {
+  it('list all the products and carousel', () => {
     // Check a product
     expect(screen.getByText('Supplement A')).toBeInTheDocument();
 
-    // Check total products
-    expect(screen.getAllByText(/Supplement/).length).toEqual(3);
+    // Check total products 3 for carousel and 3 for cards
+    expect(screen.getAllByText(/Supplement/).length).toEqual(6);
     // screen.debug();
   });
 });

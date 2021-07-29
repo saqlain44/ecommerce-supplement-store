@@ -31,7 +31,7 @@
   },
   "jestt": {
     "testMatch": [
-      "**/Home*test*"
+      "**/Register*test*"
     ]
   },
   "eslintConfig": {

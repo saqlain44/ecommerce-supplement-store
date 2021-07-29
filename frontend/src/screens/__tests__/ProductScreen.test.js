@@ -28,6 +28,7 @@ beforeEach(async () => {
       countInStock: 10,
       rating: 4.5,
       numReviews: 12,
+      reviews: [],
     },
   });
 
@@ -43,6 +44,7 @@ beforeEach(async () => {
 });
 
 it('Get a product by params id from backend', async () => {
+  // screen.debug();
   await waitFor(() => screen.getByText('Supplement A'));
 
   expect(screen.getByText(/Supplement/)).toBeInTheDocument();
