@@ -32,9 +32,9 @@ const ShippingScreen = ({ history }) => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 />
-      <h4>Shipping Address</h4>
+      <h4 className='mb-3'>SHIPPING ADDRESSS</h4>
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId='address'>
+        <Form.Group controlId='address' className='mb-3'>
           <Form.Label>Address</Form.Label>
           <Form.Control
             type='text'
@@ -44,7 +44,7 @@ const ShippingScreen = ({ history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='city' className='py-3'>
+        <Form.Group controlId='city' className='mb-3'>
           <Form.Label>City</Form.Label>
           <Form.Control
             type='text'
@@ -54,7 +54,7 @@ const ShippingScreen = ({ history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='postalCode'>
+        <Form.Group controlId='postalCode' className='mb-3'>
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
             type='text'
@@ -64,7 +64,7 @@ const ShippingScreen = ({ history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='country' className='py-3'>
+        <Form.Group controlId='country' className='mb-3'>
           <Form.Label>Country</Form.Label>
           <Form.Control
             type='text'
@@ -74,7 +74,7 @@ const ShippingScreen = ({ history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>
+        <Button type='submit' variant='primary' className='m-auto'>
           Countinue
         </Button>
       </Form>
