@@ -11,8 +11,13 @@
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server-test": "cross-env NODE_ENV=test nodemon backend/server",
+    "client-test": "cross-env BROWSER=none PORT=3006 npm start --prefix frontend",
+    "dev-test": "concurrently \"npm run server-test\" \"npm run client-test\"",
     "data:import": "node backend/seeder",
-    "data:destroy": "node backend/seeder -d"
+    "data:destroy": "node backend/seeder -d",
+    "data-test:import": "cross-env NODE_ENV=test node backend/seeder",
+    "data-test:destroy": "cross-env NODE_ENV=test node backend/seeder -d"
   },
   "repository": {
     "type": "git",
@@ -44,6 +49,9 @@
   },
   "devDependencies": {
     "concurrently": "^6.2.0",
+    "cross-env": "^7.0.3",
+    "cypress": "^8.2.0",
+    "cypress-dark": "^1.8.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.9"
   }

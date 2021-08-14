@@ -74,7 +74,7 @@ describe('fill shipping address form', () => {
 
   // Put async and store update test above any silly tests
   // otherwise it breaks
-  it('fill form with saved data', async () => {
+  it('check form fill with saved data then change country and submit', async () => {
     await waitFor(() => screen.getByText('test@example.com'));
 
     expect(screen.getByText('test@example.com')).toBeInTheDocument();
@@ -82,6 +82,16 @@ describe('fill shipping address form', () => {
     expect(screen.getByDisplayValue('Boston')).toBeInTheDocument();
     expect(screen.getByDisplayValue('1234')).toBeInTheDocument();
     expect(screen.getByDisplayValue('101 main street')).toBeInTheDocument();
+
+    fireEvent.change(screen.getByRole('textbox', { name: /Country/ }), {
+      target: { value: 'China' },
+    });
+
+    fireEvent.click(screen.getByText('Countinue'));
+
+    await waitFor(() => {
+      expect(store.getState().cart.shippingAddress.country).toEqual('China');
+    });
   });
 
   it('fill form with new data', async () => {

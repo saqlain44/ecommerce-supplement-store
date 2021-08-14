@@ -20,7 +20,7 @@ function DisplayState() {
       <h2>Display State</h2>
       {userInfo && (
         <>
-          <h1>{userInfo.username}</h1>
+          <h1>{userInfo.name}</h1>
           <h1>{userInfo.email}</h1>
         </>
       )}
@@ -56,11 +56,11 @@ describe('fill form and submit', () => {
       target: { value: 'test@example.com' },
     });
 
-    fireEvent.change(screen.getAllByLabelText('Password')[0], {
+    fireEvent.change(screen.getByLabelText('Password'), {
       target: { value: '123456' },
     });
 
-    fireEvent.change(screen.getAllByLabelText('Password')[1], {
+    fireEvent.change(screen.getByLabelText('Confirm Password'), {
       target: { value: '123456' },
     });
   });
@@ -69,7 +69,7 @@ describe('fill form and submit', () => {
   // otherwise it breaks
   it('when form is submitted, dispach register and get back user from backend', async () => {
     const userData = {
-      username: 'Test User',
+      name: 'Test User',
       email: 'test@example.com',
     };
 

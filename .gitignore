@@ -11,6 +11,7 @@ __node_modules/
 
 # testing
 /coverage
+/cypress/videos
 
 # production
 frontend/build
