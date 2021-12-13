@@ -4,17 +4,24 @@ import { Link } from 'react-router-dom';
 
 import Rating from './Rating';
 
-const Product = ({ product }) => {
+const Product = ({ product, redirect }) => {
+  const link = redirect
+    ? `/products/${product._id}?redirect=${redirect}`
+    : `/products/${product._id}`;
+
   return (
-    <Card className='my-3 p-3 rounded'>
-      <Link to={`/products/${product._id}`}>
+    <Card className='my-3 p-3 rounded' style={{ width: '16rem' }}>
+      <Link to={link}>
         <Card.Img src={product.image} />
       </Link>
 
       <Card.Body>
-        <Link to={`/products/${product._id}`}>
+        <Link
+          to={link}
+          style={{ textDecoration: 'none' }}
+        >
           <Card.Title>
-            <strong>{product.name}</strong>
+            <h5 className='fs-bold'>{product.name}</h5>
           </Card.Title>
         </Link>
         <Card.Text as='div'>
@@ -23,7 +30,7 @@ const Product = ({ product }) => {
             text={`${product.numReviews} reviews`}
           />
         </Card.Text>
-        <Card.Text as='h3' className='product-price'>
+        <Card.Text as='h5' className='product-price'>
           ${product.price}
         </Card.Text>
       </Card.Body>

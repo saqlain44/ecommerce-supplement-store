@@ -2,11 +2,12 @@ const asyncHandler = require('express-async-handler');
 const Product = require('../models/productModel');
 
 // @dec       Fetch all products
-// @route     GET /api/products
+// @route     GET /api/products?category=protein
 // @access    Public
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 2;
   const page = Number(req.query.pageNumber) || 1;
+  const category = req.query.category ? {category: req.query.category} : {}
   const keyword = req.query.keyword
     ? {
         name: {
@@ -16,9 +17,9 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const count = await Product.countDocuments({ ...keyword });
+  const count = await Product.countDocuments({ ...keyword, ...category });
 
-  const products = await Product.find({ ...keyword })
+  const products = await Product.find({ ...keyword, ...category })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
@@ -148,9 +149,29 @@ const getTopProducts = asyncHandler(async (req, res) => {
   res.json(products);
 });
 
+// @dec       Fetch latest products up to 4
+// @route     GET /api/products/latest
+// @access    Public
+const getLatestProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ updatedAt: -1 }).limit(4);
+  res.json({ products });
+});
+
+// @dec       Fetch Protein Products
+// @route     GET /api/products/trending?category=protein
+// @access    Public
+const getTrendingProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({ category: req.query.category })
+    .sort({ updatedAt: -1 })
+    .limit(4);
+  res.json({ products });
+});
+
 module.exports = {
   getProducts,
   getProductById,
+  getLatestProducts,
+  getTrendingProducts,
   getTopProducts,
   createProduct,
   updateProduct,

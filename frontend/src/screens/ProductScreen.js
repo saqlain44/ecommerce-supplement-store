@@ -20,7 +20,9 @@ import Message from '../components/Message';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
 import Meta from '../components/Meta';
 
-const ProductScreen = ({ match, history }) => {
+const ProductScreen = ({ match, history, location }) => {
+  const redirect = location.search ? location.search.split('=')[1] : '/';
+
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -63,7 +65,7 @@ const ProductScreen = ({ match, history }) => {
 
   return (
     <div>
-      <Link className='btn btn-dark my-3' to='/'>
+      <Link className='btn btn-dark my-3' to={redirect}>
         GO BACK
       </Link>
       {loading ? (

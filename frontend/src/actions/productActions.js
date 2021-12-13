@@ -12,25 +12,34 @@ import {
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_LATEST_FAIL,
+  PRODUCT_LATEST_REQUEST,
+  PRODUCT_LATEST_SUCCESS,
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
   PRODUCT_TOP_FAIL,
   PRODUCT_TOP_REQUEST,
   PRODUCT_TOP_SUCCESS,
+  PRODUCT_TRENDING_BCAA_FAIL,
+  PRODUCT_TRENDING_BCAA_REQUEST,
+  PRODUCT_TRENDING_BCAA_SUCCESS,
+  PRODUCT_TRENDING_PROTEIN_FAIL,
+  PRODUCT_TRENDING_PROTEIN_REQUEST,
+  PRODUCT_TRENDING_PROTEIN_SUCCESS,
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
 } from '../constants/productConstants';
 
 export const listProducts =
-  (keyword = '', pageNumber = '') =>
+  (keyword = '', pageNumber = '', category = '') =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
 
       const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&category=${category}`
       );
 
       dispatch({
@@ -218,6 +227,69 @@ export const listTopProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_TOP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listLatestProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_LATEST_REQUEST });
+
+    const { data } = await axios.get('/api/products/latest');
+
+    dispatch({
+      type: PRODUCT_LATEST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LATEST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listTrendingProtein = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_TRENDING_PROTEIN_REQUEST });
+
+    const { data } = await axios.get('/api/products/trending?category=protein');
+
+    dispatch({
+      type: PRODUCT_TRENDING_PROTEIN_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_TRENDING_PROTEIN_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listTrendingBcaa = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_TRENDING_BCAA_REQUEST });
+
+    const { data } = await axios.get('/api/products/trending?category=bcaa');
+
+    dispatch({
+      type: PRODUCT_TRENDING_BCAA_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_TRENDING_BCAA_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

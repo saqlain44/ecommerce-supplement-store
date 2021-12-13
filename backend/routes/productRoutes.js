@@ -5,6 +5,8 @@ const { protect, admin } = require('../middleware/authMiddleware');
 const {
   getProducts,
   getProductById,
+  getLatestProducts,
+  getTrendingProducts,
   getTopProducts,
   createProduct,
   updateProduct,
@@ -14,6 +16,8 @@ const {
 
 router.route('/').get(getProducts).post(protect, admin, createProduct);
 router.route('/top').get(getTopProducts);
+router.route('/latest').get(getLatestProducts);
+router.route('/trending').get(getTrendingProducts);
 
 router
   .route('/:id')

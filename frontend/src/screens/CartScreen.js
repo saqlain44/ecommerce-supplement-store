@@ -41,7 +41,7 @@ const CartScreen = ({ match, location, history }) => {
 
   return (
     <Row>
-      <h3 className='shopping-cart-title'>Shopping Cart</h3>
+      <h4 className='shopping-cart-title fw-bold'>Shopping Cart</h4>
       <Col md={8}>
         {cartItems.length === 0 ? (
           <Message>
@@ -85,7 +85,7 @@ const CartScreen = ({ match, location, history }) => {
                   <Col md={2}>
                     <Button
                       type='button'
-                      variant='light'
+                      variant='danger'
                       onClick={() => removeFromCartHandler(item.product)}
                     >
                       <i className='fas fa-trash' />

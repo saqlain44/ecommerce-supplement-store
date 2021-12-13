@@ -12,6 +12,9 @@ import {
   productDeleteReducer,
   productReviewCreateReducer,
   productTopRatedReducer,
+  productLatestReducer,
+  productTrendingProteinReducer,
+  productTrendingBcaaReducer,
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import {
@@ -40,6 +43,9 @@ const reducer = combineReducers({
   productDelete: productDeleteReducer,
   productReviewCreate: productReviewCreateReducer,
   productTopRated: productTopRatedReducer,
+  productLatest: productLatestReducer,
+  productTrendingProtein: productTrendingProteinReducer,
+  productTrendingBcaa: productTrendingBcaaReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

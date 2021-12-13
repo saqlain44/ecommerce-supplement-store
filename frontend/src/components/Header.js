@@ -10,8 +10,10 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-
   const { userInfo } = userLogin;
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -19,29 +21,50 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>Nutrition-Strat</Navbar.Brand>
+            <Navbar.Brand className='fw-bold'>Nutrition-Strat</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='mr-auto'>
               <LinkContainer to='/collections/protein'>
-                <Nav.Link>Protein</Nav.Link>
+                <Nav.Link className='fw-bold'>Protein</Nav.Link>
               </LinkContainer>
-              <LinkContainer to='/collections/performance'>
-                <Nav.Link>Performance</Nav.Link>
-              </LinkContainer>
+              <NavDropdown
+                title='Essentials'
+                id='basic-nav-dropdown'
+                className='fw-bold'
+              >
+                <LinkContainer to='/collections/bcaa'>
+                  <NavDropdown.Item>BCAA</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/collections/glutamine'>
+                  <NavDropdown.Item>Glutamine</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/collections/creatine'>
+                  <NavDropdown.Item>Creatine</NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
+              <NavDropdown
+                title='More'
+                id='basic-nav-dropdown'
+                className='fw-bold'
+              >
+                <LinkContainer to='/collections/multivitamin'>
+                  <NavDropdown.Item>Multivitamin</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/collections/omega'>
+                  <NavDropdown.Item>Omega/Fish-Oil</NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
             </Nav>
-            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className='ml-auto nav-right-items'>
-              <LinkContainer to='/cart'>
-                <Nav.Link>
-                  <i className='fas fa-shopping-cart'></i> Cart
-                </Nav.Link>
-              </LinkContainer>
-
+              <Route
+                render={({ history }) => <SearchBox history={history} />}
+              />
+              &nbsp; &nbsp; &nbsp;
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' id='adminmenu'>
                   <LinkContainer to='/admin/userlist'>
@@ -57,9 +80,13 @@ const Header = () => {
                   </LinkContainer>
                 </NavDropdown>
               )}
-
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id='username'>
+                <NavDropdown
+                  title={
+                    <i className='fas fa-user' style={{ fontSize: '22px' }}></i>
+                  }
+                  id='username'
+                >
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
@@ -74,6 +101,45 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
+              <LinkContainer to='/cart'>
+                <Nav.Link>
+                  <span className='fw-bold'>Cart &nbsp; / &nbsp;</span>
+                  {cartItems && cartItems.length > 0 && (
+                    <>
+                      <span className='fw-bold'>
+                        $
+                        {cartItems
+                          .reduce((acc, item) => acc + item.qty * item.price, 0)
+                          .toFixed(2)}
+                      </span>
+                      &nbsp;{' '}
+                    </>
+                  )}
+                  <i className='fas fa-shopping-cart'></i>
+                  {cartItems && cartItems.length > 0 && (
+                    <div
+                      className='bg-danger text-center'
+                      style={{
+                        borderRadius: '50%',
+                        height: '18px',
+                        width: '18px',
+                        display: 'inline-block',
+                      }}
+                    >
+                      <span
+                        className='text-center fw-bold'
+                        style={{
+                          position: 'relative',
+                          top: '-5px',
+                          fontSize: '12px',
+                        }}
+                      >
+                        {cartItems.length}
+                      </span>
+                    </div>
+                  )}
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>

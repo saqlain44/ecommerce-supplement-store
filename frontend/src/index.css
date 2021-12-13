@@ -8,7 +8,7 @@ main {
 
 .card-img {
   width: 100% !important;
-  height: 200px !important;
+  height: 150px !important;
   object-fit: contain;
 }
 

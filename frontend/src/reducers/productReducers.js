@@ -13,12 +13,21 @@ import {
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_LATEST_FAIL,
+  PRODUCT_LATEST_REQUEST,
+  PRODUCT_LATEST_SUCCESS,
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
   PRODUCT_TOP_FAIL,
   PRODUCT_TOP_REQUEST,
   PRODUCT_TOP_SUCCESS,
+  PRODUCT_TRENDING_PROTEIN_FAIL,
+  PRODUCT_TRENDING_PROTEIN_REQUEST,
+  PRODUCT_TRENDING_PROTEIN_SUCCESS,
+  PRODUCT_TRENDING_BCAA_FAIL,
+  PRODUCT_TRENDING_BCAA_REQUEST,
+  PRODUCT_TRENDING_BCAA_SUCCESS,
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_RESET,
@@ -130,6 +139,60 @@ export const productTopRatedReducer = (state = { products: [] }, action) => {
         products: action.payload,
       };
     case PRODUCT_TOP_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productLatestReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case PRODUCT_LATEST_REQUEST:
+      return { loading: true, products: [] };
+    case PRODUCT_LATEST_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload.products,
+      };
+    case PRODUCT_LATEST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productTrendingProteinReducer = (
+  state = { products: [] },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_TRENDING_PROTEIN_REQUEST:
+      return { loading: true, products: [] };
+    case PRODUCT_TRENDING_PROTEIN_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload.products,
+      };
+    case PRODUCT_TRENDING_PROTEIN_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productTrendingBcaaReducer = (
+  state = { products: [] },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_TRENDING_BCAA_REQUEST:
+      return { loading: true, products: [] };
+    case PRODUCT_TRENDING_BCAA_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload.products,
+      };
+    case PRODUCT_TRENDING_BCAA_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
