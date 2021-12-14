@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import LatestProducts from '../components/LatestProducts';
 import ProductCarousel from '../components/ProductCarousel';
@@ -26,6 +27,7 @@ const HomeScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));
+    //window.scrollTo(0, 0)
   }, [dispatch, keyword, pageNumber]);
 
   return (
@@ -56,14 +58,21 @@ const HomeScreen = ({ match }) => {
             </Col>
           </Row>
           <Row className='bg-light p-4 text-dark'>
-            <Col className='text-end' md={8}>
+            <Col className='text-center'>
               <h4>Authenticity Information When Buying Your Supplements</h4>
-            </Col>
-            <Col>
-              <Button variant='outline-warning' className='fw-bold'>
-                BUY AUTHENTIC &nbsp;
-                <i className='fas fa-caret-right' style={{position: 'relative', top: '2px', fontSize: '20px'}}></i>
-              </Button>
+              <LinkContainer to='/authenticity'>
+                <Button variant='outline-warning' className='fw-bold'>
+                  BUY AUTHENTIC &nbsp;
+                  <i
+                    className='fas fa-caret-right'
+                    style={{
+                      position: 'relative',
+                      top: '2px',
+                      fontSize: '20px',
+                    }}
+                  ></i>
+                </Button>
+              </LinkContainer>
             </Col>
           </Row>
 

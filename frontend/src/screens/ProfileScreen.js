@@ -33,6 +33,7 @@ const ProfileScreen = ({ history }) => {
     if (!userInfo) {
       history.push('/login');
     } else {
+      window.scrollTo(0, 0);
       if (!user) {
         dispatch(getUserDetails('profile'));
         dispatch(listMyOrders());

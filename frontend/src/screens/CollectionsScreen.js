@@ -21,6 +21,7 @@ const CollectionsScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber, match.params.collection));
+    window.scrollTo(0, 0);
   }, [dispatch, keyword, pageNumber, match]);
 
   return (

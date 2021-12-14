@@ -7,6 +7,9 @@ import CheckoutSteps from '../components/CheckoutSteps';
 import Message from '../components/Message';
 import { createOrder } from '../actions/orderActions';
 import {ORDER_CREATE_RESET, ORDER_DETAILS_RESET} from '../constants/orderConstants';
+import {
+  CART_RESET_ITEMS
+} from '../constants/cartConstants';
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -36,6 +39,7 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     if (success && order) {
       dispatch({type: ORDER_DETAILS_RESET})
+      dispatch({type: CART_RESET_ITEMS })
       history.push(`/order/${order._id}`);
       dispatch({type: ORDER_CREATE_RESET})
     }

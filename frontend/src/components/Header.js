@@ -21,7 +21,13 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar
+        bg='primary'
+        variant='dark'
+        expand='lg'
+        collapseOnSelect
+        className='fixed-top'
+      >
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand className='fw-bold'>Nutrition-Strat</Navbar.Brand>

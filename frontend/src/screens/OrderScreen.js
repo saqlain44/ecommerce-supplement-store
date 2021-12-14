@@ -15,9 +15,6 @@ import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
 } from '../constants/orderConstants';
-import {
-  CART_RESET_ITEMS
-} from '../constants/cartConstants';
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
@@ -70,7 +67,6 @@ const OrderScreen = ({ match, history }) => {
     if (!order || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
-      dispatch({type: CART_RESET_ITEMS })
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {

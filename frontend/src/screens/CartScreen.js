@@ -26,6 +26,10 @@ const CartScreen = ({ match, location, history }) => {
   const { cartItems } = cart;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }

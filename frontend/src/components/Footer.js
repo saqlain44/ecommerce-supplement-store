@@ -152,7 +152,14 @@ const Footer = () => {
             <p style={{ fontSize: '14px' }} className='text-warning fw-bold'>
               Not a real website, it's just a moke up ecommerce website. Do not
               enter any personal information or credit card information in this
-              site!!
+              site!! More information: &nbsp;
+              <a
+                href='https://www.memoryinject.io'
+                target='_blank'
+                rel='noreferrer'
+              >
+                memoryinject.io
+              </a>
             </p>
           </Col>
         </Row>
