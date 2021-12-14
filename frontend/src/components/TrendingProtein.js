@@ -10,28 +10,30 @@ import { listTrendingProtein } from '../actions/productActions';
 
 const TrendingProtein = () => {
   const dispatch = useDispatch();
-  const productTrendingProtein = useSelector((state) => state.productTrendingProtein);
+  const productTrendingProtein = useSelector(
+    (state) => state.productTrendingProtein
+  );
   const { loading, error, products } = productTrendingProtein;
 
   useEffect(() => {
-      dispatch(listTrendingProtein());
-
+    dispatch(listTrendingProtein());
   }, [dispatch]);
 
   return (
     <>
-      {loading ? (
+      {loading && !products ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
           <Row>
-            {products.map((product) => (
-              <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
-                <Product product={product} />
-              </Col>
-            ))}
+            {products &&
+              products.map((product) => (
+                <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
+                  <Product product={product} />
+                </Col>
+              ))}
           </Row>
         </>
       )}

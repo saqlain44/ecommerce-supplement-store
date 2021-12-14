@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import LatestProducts from '../components/LatestProducts';
@@ -53,6 +53,17 @@ const HomeScreen = ({ match }) => {
                 </Col>
               </Row>
               <LatestProducts />
+            </Col>
+          </Row>
+          <Row className='bg-light p-4 text-dark'>
+            <Col className='text-end' md={8}>
+              <h4>Authenticity Information When Buying Your Supplements</h4>
+            </Col>
+            <Col>
+              <Button variant='outline-warning' className='fw-bold'>
+                BUY AUTHENTIC &nbsp;
+                <i className='fas fa-caret-right' style={{position: 'relative', top: '2px', fontSize: '20px'}}></i>
+              </Button>
             </Col>
           </Row>
 

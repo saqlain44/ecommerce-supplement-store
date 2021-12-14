@@ -16,24 +16,25 @@ const ProductCarousel = () => {
     dispatch(listTopProducts());
   }, [dispatch]);
 
-  return loading ? (
+  return loading && !products ? (
     <Loader />
   ) : error ? (
     <Message variant='danger'>{error}</Message>
   ) : (
     <Carousel pause='hover' className='carousel-bg'>
-      {products.map((product) => (
-        <Carousel.Item key={product._id}>
-          <Link to={`/products/${product._id}`}>
-            <Image src={product.image} alt={product.name} fluid />
-            <Carousel.Caption className='carousel-caption'>
-              <h2>
-                {product.name} (${product.price})
-              </h2>
-            </Carousel.Caption>
-          </Link>
-        </Carousel.Item>
-      ))}
+      {products &&
+        products.map((product) => (
+          <Carousel.Item key={product._id}>
+            <Link to={`/products/${product._id}`}>
+              <Image src={product.image} alt={product.name} fluid />
+              <Carousel.Caption className='carousel-caption'>
+                <h2>
+                  {product.name} (${product.price})
+                </h2>
+              </Carousel.Caption>
+            </Link>
+          </Carousel.Item>
+        ))}
     </Carousel>
   );
 };

@@ -57,7 +57,7 @@ const Footer = () => {
               Orders & Shipping
             </h6>
             <Nav defaultActiveKey='/' className='flex-column text-start'>
-              <Nav.Link href='/' style={{ padding: '0.25rem 1rem' }}>
+              <Nav.Link href='/profile' style={{ padding: '0.25rem 1rem' }}>
                 Order Status
               </Nav.Link>
               <Nav.Link eventKey='link-1' style={{ padding: '0.25rem 1rem' }}>

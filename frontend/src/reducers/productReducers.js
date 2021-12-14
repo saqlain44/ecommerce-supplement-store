@@ -129,10 +129,10 @@ export const productReviewCreateReducer = (state = {}, action) => {
   }
 };
 
-export const productTopRatedReducer = (state = { products: [] }, action) => {
+export const productTopRatedReducer = (state = { products: null }, action) => {
   switch (action.type) {
     case PRODUCT_TOP_REQUEST:
-      return { loading: true, products: [] };
+      return { loading: true, products: state.products };
     case PRODUCT_TOP_SUCCESS:
       return {
         loading: false,
@@ -145,10 +145,10 @@ export const productTopRatedReducer = (state = { products: [] }, action) => {
   }
 };
 
-export const productLatestReducer = (state = { products: [] }, action) => {
+export const productLatestReducer = (state = { products: null }, action) => {
   switch (action.type) {
     case PRODUCT_LATEST_REQUEST:
-      return { loading: true, products: [] };
+      return { loading: true, products: state.products };
     case PRODUCT_LATEST_SUCCESS:
       return {
         loading: false,
@@ -162,12 +162,12 @@ export const productLatestReducer = (state = { products: [] }, action) => {
 };
 
 export const productTrendingProteinReducer = (
-  state = { products: [] },
+  state = { products: null },
   action
 ) => {
   switch (action.type) {
     case PRODUCT_TRENDING_PROTEIN_REQUEST:
-      return { loading: true, products: [] };
+      return { loading: true, products: state.products };
     case PRODUCT_TRENDING_PROTEIN_SUCCESS:
       return {
         loading: false,
@@ -181,12 +181,12 @@ export const productTrendingProteinReducer = (
 };
 
 export const productTrendingBcaaReducer = (
-  state = { products: [] },
+  state = { products: null },
   action
 ) => {
   switch (action.type) {
     case PRODUCT_TRENDING_BCAA_REQUEST:
-      return { loading: true, products: [] };
+      return { loading: true, products: state.products };
     case PRODUCT_TRENDING_BCAA_SUCCESS:
       return {
         loading: false,

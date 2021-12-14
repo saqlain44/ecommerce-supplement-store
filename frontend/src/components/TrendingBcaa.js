@@ -14,24 +14,24 @@ const TrendingBcaa = () => {
   const { loading, error, products } = productTrendingBcaa;
 
   useEffect(() => {
-      dispatch(listTrendingBcaa());
-
+    dispatch(listTrendingBcaa());
   }, [dispatch]);
 
   return (
     <>
-      {loading ? (
+      {loading && !products ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
           <Row>
-            {products.map((product) => (
-              <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
-                <Product product={product} />
-              </Col>
-            ))}
+            {products &&
+              products.map((product) => (
+                <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
+                  <Product product={product} />
+                </Col>
+              ))}
           </Row>
         </>
       )}
