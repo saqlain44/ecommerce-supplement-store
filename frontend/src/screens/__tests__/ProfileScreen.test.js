@@ -9,6 +9,9 @@ import axios from 'axios';
 
 jest.mock('axios');
 
+// Jest mock implementation of window.scrollTo
+global.scrollTo = () => true;
+
 // Need this component in order to update the state
 // because current ProfileScreen doesn't have userUpdate to render on screen
 function DisplayState() {

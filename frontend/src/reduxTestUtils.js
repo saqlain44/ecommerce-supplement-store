@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import origStore from './store';
 
@@ -10,13 +11,18 @@ const TestProvider = ({ store, children }) => (
 );
 
 export function testRender(ui, { store, ...otherOpts }) {
-  return render(<TestProvider store={store}>{ui}</TestProvider>, otherOpts);
+  return render(
+    <TestProvider store={store}>
+      <Router>{ui}</Router>
+    </TestProvider>,
+    otherOpts
+  );
 }
 
 export function makeTestStore() {
   const store = origStore;
-  const origDispatch = store.dispatch;
-  store.dispatch = jest.fn(origDispatch);
+  //const origDispatch = store.dispatch;
+  //store.dispatch = jest.fn(origDispatch);
   return store;
 }
 

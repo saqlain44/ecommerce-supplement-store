@@ -8,10 +8,14 @@ import axios from 'axios';
 
 jest.mock('axios');
 
+// Jest mock implementation of window.scrollTo
+global.scrollTo = () => true;
+
 let store;
 
 const history = { push: function () {} };
 const match = { params: { id: 5 } };
+const location = {}
 
 beforeEach(async () => {
   await axios.get.mockResolvedValueOnce({
@@ -35,7 +39,7 @@ beforeEach(async () => {
   store = makeTestStore();
   testRender(
     <Router>
-      <ProductScreen history={history} match={match} />
+      <ProductScreen history={history} match={match} location={location} />
     </Router>,
     {
       store,

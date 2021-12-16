@@ -1,17 +1,13 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import '@testing-library/jest-dom';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
 import { testRender, makeTestStore } from '../../reduxTestUtils';
 import PlaceOrderScreen from '../PlaceOrderScreen';
 
-import axios from 'axios';
-
-jest.mock('axios');
-
 let store;
 
-const location = {};
 const history = { push: function () {} };
 
 const productList = [
@@ -96,6 +92,16 @@ const order = {
   __v: 0,
 };
 
+const server = setupServer(
+  rest.post('/api/orders', (req, res, ctx) => {
+    return res(ctx.json(order));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
 beforeEach(async () => {
   store = makeTestStore();
   await store.dispatch({ type: 'USER_LOGIN_SUCCESS', payload: userData });
@@ -114,30 +120,22 @@ beforeEach(async () => {
     payload: 'PayPal',
   });
 
-  testRender(
-    <Router>
-      <PlaceOrderScreen history={history} />
-    </Router>,
-    {
-      store,
-    }
-  );
+  testRender(<PlaceOrderScreen history={history} />, {
+    store,
+  });
 });
 
 describe('Check Place Order Screen', () => {
-  // Put async and store update test above any silly tests
-  // otherwise it breaks
   it('check PayPal in the screen and submit', async () => {
-    await axios.post.mockResolvedValueOnce({ data: order });
-
     expect(screen.getByText(/PayPal/)).toBeInTheDocument();
     expect(screen.getByText(/USA/)).toBeInTheDocument();
     expect(screen.getAllByText(/Supplement/).length).toEqual(3);
 
     fireEvent.click(screen.getByRole('button'));
 
-    await waitFor(() =>
-      expect(store.getState().orderCreate.order.totalPrice).toEqual(188)
+    await waitFor(
+      () => expect(store.getState().orderCreate.order.totalPrice).toEqual(188),
+      { timeout: 3000 }
     );
     // await waitFor(() => console.log(store.getState()));
     // screen.debug();

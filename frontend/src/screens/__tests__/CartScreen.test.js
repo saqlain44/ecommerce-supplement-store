@@ -4,6 +4,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { testRender, makeTestStore } from '../../reduxTestUtils';
 import CartScreen from '../CartScreen';
 
+// Jest mock implementation of window.scrollTo
+global.scrollTo = () => true;
+
 let store;
 
 const location = {};

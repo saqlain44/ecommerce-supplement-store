@@ -1,96 +1,76 @@
-import { screen } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { screen, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
 import { testRender, makeTestStore } from '../../reduxTestUtils';
 import HomeScreen from '../HomeScreen';
 
-import axios from 'axios';
-
-jest.mock('axios');
-
-const productList = [
-  {
-    _id: '1',
-    name: 'Supplement A',
-    image: '/images/productA.png',
-    description: 'This is Product A',
-    brand: 'PRODUCT A',
-    category: 'protein',
-    price: 29.99,
-    size: '2 lbs.',
-    flavour: 'Double Rich Chocolate',
-    countInStock: 10,
-    rating: 4.5,
-    numReviews: 12,
-  },
-  {
-    _id: '2',
-    name: 'Supplement B',
-    image: '/images/productB.png',
-    description: 'This is Product B',
-    brand: 'PRODUCT B',
-    category: 'protein',
-    price: 29.99,
-    size: '2 lbs.',
-    flavour: 'No Flavour',
-    countInStock: 10,
-    rating: 4.5,
-    numReviews: 12,
-  },
-  {
-    _id: '3',
-    name: 'Supplement C',
-    image: '/images/productC.png',
-    description: 'This is Product C',
-    brand: 'PRODUCT C',
-    category: 'bcaa',
-    price: 29.99,
-    size: '2 lbs.',
-    flavour: 'Lime',
-    countInStock: 10,
-    rating: 4.5,
-    numReviews: 12,
-  },
-];
+import * as topProducts from './data/topProducts.json';
+import * as products from './data/products.json';
 
 let store;
 
-const match = { params: { keyword: '' } };
+let match = { params: { keyword: '', pageNumber: 1 }, url: '/' };
+
+const server = setupServer(
+  rest.get('/api/products', (req, res, ctx) => {
+    return res(ctx.json(products));
+  }),
+
+  rest.get('/api/products/top', (req, res, ctx) => {
+    return res(ctx.json(topProducts));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 // Jest mock implementation of window.confirm
-global.confirm = () => true;
+//global.confirm = () => true;
+
+// Mock few components which is tested seperately
+jest.mock('../../components/LatestProducts', () => () => {
+  return <h1>LatestProducts</h1>;
+});
+
+jest.mock('../../components/TrendingBcaa', () => () => {
+  return <h1>TrendingBcaa</h1>;
+});
+
+jest.mock('../../components/TrendingProtein', () => () => {
+  return <h1>TrendingProtein</h1>;
+});
 
 beforeEach(async () => {
   store = makeTestStore();
 
-  // Product ProductCarousel, it should be at first because it's import form another file
-  await axios.get.mockResolvedValueOnce({
-    data: productList,
+  testRender(<HomeScreen match={match} />, {
+    store,
   });
-
-  // All product list
-  await axios.get.mockResolvedValueOnce({
-    data: { products: productList, page: 1, pages: 1 },
-  });
-
-  testRender(
-    <Router>
-      <HomeScreen match={match} />
-    </Router>,
-    {
-      store,
-    }
-  );
 });
 
 describe('Show all products', () => {
-  it('list all the products and carousel', () => {
-    // Check a product
-    expect(screen.getByText('Supplement A')).toBeInTheDocument();
+  it('list all componets', () => {
+    // Check the mocked componets
+    expect(screen.getByText('LatestProducts')).toBeInTheDocument();
 
-    // Check total products 3 for carousel and 3 for cards
-    expect(screen.getAllByText(/Supplement/).length).toEqual(6);
-    // screen.debug();
+    expect(screen.getByText('TrendingProtein')).toBeInTheDocument();
+
+    expect(screen.getByText('TrendingBcaa')).toBeInTheDocument();
+  });
+
+  it('list all the products', async () => {
+    // Need to change the url in order to see all products
+    match.url = '/products';
+
+    // Need to re render the screen after change the url
+    testRender(<HomeScreen match={match} />, {
+      store,
+    });
+
+    // Check if the products show up
+    await waitFor(() => screen.findAllByText(products.products[0].name));
   });
 });

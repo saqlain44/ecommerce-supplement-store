@@ -1,17 +1,16 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import '@testing-library/jest-dom';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
 import { testRender, makeTestStore } from '../../reduxTestUtils';
 import OrderScreen from '../OrderScreen';
 
-import axios from 'axios';
-
-jest.mock('axios');
+// Mock console.log on useEffect
+global.console = {log: jest.fn()}
 
 let store;
 
-const location = {};
 const history = { push: function () {} };
 const match = { params: { id: '60f718d112f3d301b82ff070' } };
 
@@ -97,6 +96,17 @@ const order = {
   __v: 0,
 };
 
+const server = setupServer(
+  // for paypal
+  rest.get('/api/config/paypal', (req, res, ctx) => {
+    return res(ctx.json({ clientId: 'abc1234' }));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
 beforeEach(async () => {
   store = makeTestStore();
   await store.dispatch({ type: 'USER_LOGIN_SUCCESS', payload: userData });
@@ -120,24 +130,13 @@ beforeEach(async () => {
     payload: order,
   });
 
-  // for paypal
-  await axios.get.mockResolvedValueOnce({ data: { clientId: 'abc1234' } });
-
-  testRender(
-    <Router>
-      <OrderScreen history={history} match={match} />
-    </Router>,
-    {
-      store,
-    }
-  );
+  testRender(<OrderScreen history={history} match={match} />, {
+    store,
+  });
 });
 
 describe('Check Order Screen', () => {
-  // Put async and store update test above any silly tests
-  // otherwise it breaks
   it('check current order details', async () => {
-    await axios.get.mockResolvedValueOnce({ data: { clientId: 'abc1234' } });
     expect(screen.getByText(/60f718d112f3d301b82ff070/)).toBeInTheDocument();
     expect(screen.getByText('Not Paid')).toBeInTheDocument();
   });

@@ -1,13 +1,11 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import '@testing-library/jest-dom';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
 import { testRender, makeTestStore } from '../../reduxTestUtils';
 import RegisterScreen from '../RegisterScreen';
-
-import axios from 'axios';
-
-jest.mock('axios');
 
 // Need this component in order to update the state
 // because current RegisterScreen doesn't have userLogin to render on screen
@@ -32,14 +30,28 @@ let store;
 
 const location = {};
 const history = { push: function () {} };
+const userData = {
+  name: 'Test User',
+  email: 'test@example.com',
+};
+
+const server = setupServer(
+  rest.post('/api/users', (req, res, ctx) => {
+    return res(ctx.json(userData));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 beforeEach(() => {
   store = makeTestStore();
   testRender(
-    <Router>
+    <>
       <DisplayState />
       <RegisterScreen location={location} history={history} />
-    </Router>,
+    </>,
     {
       store,
     }
@@ -65,19 +77,8 @@ describe('fill form and submit', () => {
     });
   });
 
-  // Put async and store update test above any silly tests
-  // otherwise it breaks
   it('when form is submitted, dispach register and get back user from backend', async () => {
-    const userData = {
-      name: 'Test User',
-      email: 'test@example.com',
-    };
-
-    await axios.post.mockResolvedValueOnce({ data: userData });
-
     fireEvent.click(screen.getByRole('button'));
-
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
 
     // Wait for the state update
     await waitFor(() => screen.findByText('test@example.com'));
