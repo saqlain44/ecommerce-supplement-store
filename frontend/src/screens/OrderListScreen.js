@@ -44,7 +44,7 @@ const OrderListScreen = ({ history }) => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {orders.map((order, idx) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
@@ -66,7 +66,11 @@ const OrderListScreen = ({ history }) => {
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant='secondary' className='btn-sm'>
+                    <Button
+                      variant='secondary'
+                      className='btn-sm'
+                      data-cy={`btn-details-${idx}`}
+                    >
                       Details
                     </Button>
                   </LinkContainer>

@@ -87,7 +87,7 @@ const PlaceOrderScreen = ({ history }) => {
               ) : (
                 <ListGroup variant='flush'>
                   {cart.cartItems.map((item, index) => (
-                    <ListGroup.Item key={index}>
+                    <ListGroup.Item key={index} data-cy='order-item'>
                       <Row>
                         <Col md={1}>
                           <Image
@@ -158,6 +158,7 @@ const PlaceOrderScreen = ({ history }) => {
                   className='btn-block'
                   disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
+                  data-cy='btn-place-order'
                 >
                   Place Order
                 </Button>

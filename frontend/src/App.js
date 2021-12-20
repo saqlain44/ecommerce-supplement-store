@@ -25,7 +25,9 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main className='py-3' style={{marginTop: '3rem'}}>
+      <main className='py-3' style={{
+        marginTop: '50px'
+        }}>
         <Container>
           <Route path='/' component={HomeScreen} exact />
           <Route path='/products' component={HomeScreen} exact />

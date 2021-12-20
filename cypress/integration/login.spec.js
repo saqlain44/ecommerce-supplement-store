@@ -24,8 +24,8 @@ describe('BlogSnippet login', () => {
   it('does not work with wrong credentials', () => {
     cy.contains('Sign-in').click();
 
-    cy.contains('Email Address').type('wrong@email.com');
-    cy.contains('Password').type('no-such-user');
+    cy.get('[data-cy=email]').type('wrong@email.com');
+    cy.get('[data-cy=password]').type('no-such-user');
 
     cy.get('.btn').contains('Sign In').click();
 
@@ -46,7 +46,7 @@ describe('BlogSnippet login', () => {
     cy.url().should('not.contain', '/login');
     cy.location('pathname').should('equal', '/');
 
-    // When we are logged in, there should be name visible
-    cy.get('.dropdown').contains(user.name).should('be.visible');
+    // When we are logged in, there should be user icon visible
+    cy.get('[data-cy=username]').should('be.visible');
   });
 });

@@ -41,6 +41,7 @@ const ShippingScreen = ({ history }) => {
             placeholder='Enter Address'
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+            data-cy='form-address'
           ></Form.Control>
         </Form.Group>
 
@@ -51,6 +52,7 @@ const ShippingScreen = ({ history }) => {
             placeholder='Enter City'
             value={city}
             onChange={(e) => setCity(e.target.value)}
+            data-cy='form-city'
           ></Form.Control>
         </Form.Group>
 
@@ -61,6 +63,7 @@ const ShippingScreen = ({ history }) => {
             placeholder='Enter Postal Code'
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
+            data-cy='form-postal-code'
           ></Form.Control>
         </Form.Group>
 
@@ -71,10 +74,16 @@ const ShippingScreen = ({ history }) => {
             placeholder='Enter Country'
             value={country}
             onChange={(e) => setCountry(e.target.value)}
+            data-cy='form-country'
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary' className='m-auto'>
+        <Button
+          type='submit'
+          variant='primary'
+          className='m-auto'
+          data-cy='btn-continue'
+        >
           Countinue
         </Button>
       </Form>

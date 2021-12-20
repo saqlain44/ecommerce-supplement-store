@@ -24,6 +24,7 @@ const LoginScreen = ({ location, history }) => {
     if (userInfo) {
       history.push(redirect);
     }
+    window.scrollTo(0, 0)
   }, [history, redirect, userInfo]);
 
   const submitHandler = (e) => {
@@ -34,7 +35,7 @@ const LoginScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
-      <h4>Sign In</h4>
+      <h4 data-cy='sign-in'>Sign In</h4>
       {error && <Message>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
@@ -43,6 +44,7 @@ const LoginScreen = ({ location, history }) => {
           <Form.Control
             type='email'
             placeholder='Enter Email'
+            data-cy='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
@@ -53,6 +55,7 @@ const LoginScreen = ({ location, history }) => {
           <Form.Control
             type='password'
             placeholder='Enter Password'
+            data-cy='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>

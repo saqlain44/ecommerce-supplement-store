@@ -42,7 +42,11 @@ const ProductListScreen = ({ history, match }) => {
   useEffect(() => {
     dispatch({ type: PRODUCT_CREATE_RESET });
 
-    if (!userInfo.isAdmin) {
+    if (!userInfo) {
+      history.push('/login');
+    }
+
+    if (userInfo && !userInfo.isAdmin) {
       history.push('/login');
     }
 
@@ -78,7 +82,11 @@ const ProductListScreen = ({ history, match }) => {
           <h2>Products</h2>
         </Col>
         <Col className='text-right'>
-          <Button className='my-3' onClick={createProductHandler}>
+          <Button
+            className='my-3'
+            onClick={createProductHandler}
+            data-cy='btn-create-product'
+          >
             <i className='fas fa-plus'></i>&nbsp;Create Product
           </Button>
         </Col>
@@ -113,7 +121,10 @@ const ProductListScreen = ({ history, match }) => {
                   <td>{product.brand}</td>
                   <td>{product.category}</td>
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <LinkContainer
+                      to={`/admin/product/${product._id}/edit`}
+                      data-cy={`btn-${product.name.replace(/\s+/g, '')}-edit`}
+                    >
                       <Button variant='secondary' className='btn-sm'>
                         <i className='fas fa-edit'></i>
                       </Button>
@@ -123,6 +134,7 @@ const ProductListScreen = ({ history, match }) => {
                       variant='danger'
                       className='btn-sm'
                       onClick={() => deleteHandler(product._id)}
+                      data-cy={`btn-${product.name.replace(/\s+/g, '')}-delete`}
                     >
                       <i className='fas fa-trash'></i>
                     </Button>

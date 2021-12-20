@@ -54,7 +54,7 @@ const CartScreen = ({ match, location, history }) => {
         ) : (
           <ListGroup variant='flush'>
             {cartItems.map((item) => (
-              <ListGroup.Item key={item.product}>
+              <ListGroup.Item key={item.product} data-cy='cart-item'>
                 <Row className='shopping-cart-row'>
                   <Col md={2}>
                     <Image
@@ -119,6 +119,7 @@ const CartScreen = ({ match, location, history }) => {
                 className='btn-block'
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
+                data-cy='btn-proceed-to-checkout'
               >
                 Proceed To Checkout
               </Button>

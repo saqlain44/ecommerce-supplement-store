@@ -8,7 +8,8 @@ import PlaceOrderScreen from '../PlaceOrderScreen';
 
 let store;
 
-const history = { push: function () {} };
+const push = jest.fn((path) => console.log(path));
+const history = { push: push };
 
 const productList = [
   {
@@ -120,9 +121,14 @@ beforeEach(async () => {
     payload: 'PayPal',
   });
 
-  testRender(<PlaceOrderScreen history={history} />, {
-    store,
-  });
+  testRender(
+    <>
+      <PlaceOrderScreen history={history} />
+    </>,
+    {
+      store,
+    }
+  );
 });
 
 describe('Check Place Order Screen', () => {
@@ -133,11 +139,13 @@ describe('Check Place Order Screen', () => {
 
     fireEvent.click(screen.getByRole('button'));
 
-    await waitFor(
-      () => expect(store.getState().orderCreate.order.totalPrice).toEqual(188),
-      { timeout: 3000 }
+    // Wait for the state update and make sure the component push to next screen
+    await waitFor(() =>
+      // The first arg of first call to the function was {/order/${order._id}}
+      expect(push.mock.calls[0][0]).toBe(`/order/${order._id}`)
     );
+
     // await waitFor(() => console.log(store.getState()));
-    // screen.debug();
+    //screen.debug();
   });
 });

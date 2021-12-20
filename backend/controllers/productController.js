@@ -5,7 +5,7 @@ const Product = require('../models/productModel');
 // @route     GET /api/products?category=protein
 // @access    Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 2;
+  const pageSize = 20;
   const page = Number(req.query.pageNumber) || 1;
   const category = req.query.category ? {category: req.query.category} : {}
   const keyword = req.query.keyword

@@ -66,7 +66,7 @@ const ProductScreen = ({ match, history, location }) => {
 
   return (
     <div>
-      <Link className='btn btn-dark my-3' to={redirect}>
+      <Link className='btn btn-dark my-3' to={redirect} data-cy='btn-back'>
         GO BACK
       </Link>
       {loading ? (
@@ -155,6 +155,7 @@ const ProductScreen = ({ match, history, location }) => {
                       type='button'
                       disabled={product.countInStock === 0}
                       onClick={addToCartHandler}
+                      data-cy='btn-add-to-cart'
                     >
                       ADD TO CART
                     </Button>

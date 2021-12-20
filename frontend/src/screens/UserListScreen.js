@@ -52,19 +52,30 @@ const UserListScreen = ({ history }) => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user._id}>
+              <tr key={user._id} data-cy='user-list'>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
                   {user.isAdmin ? (
-                    <i className='fas fa-check' style={{ color: 'green' }}></i>
+                    <i
+                      className='fas fa-check'
+                      style={{ color: 'green' }}
+                      data-cy='user-admin'
+                    ></i>
                   ) : (
-                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                    <i
+                      className='fas fa-times'
+                      style={{ color: 'red' }}
+                      data-cy='user-normal'
+                    ></i>
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                  <LinkContainer
+                    to={`/admin/user/${user._id}/edit`}
+                    data-cy={`btn-${user.name.replace(/\s+/g, '')}-edit`}
+                  >
                     <Button variant='secondary' className='btn-sm'>
                       <i className='fas fa-edit'></i>
                     </Button>
@@ -74,6 +85,7 @@ const UserListScreen = ({ history }) => {
                     variant='danger'
                     className='btn-sm'
                     onClick={() => deleteHandler(user._id)}
+                    data-cy={`btn-${user.name.replace(/\s+/g, '')}-delete`}
                   >
                     <i className='fas fa-trash'></i>
                   </Button>

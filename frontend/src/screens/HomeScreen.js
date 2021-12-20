@@ -49,7 +49,11 @@ const HomeScreen = ({ match }) => {
                   </h5>
                 </Col>
                 <Col>
-                  <Link to='/products' className='btn btn-success'>
+                  <Link
+                    to='/products'
+                    className='btn btn-success'
+                    data-cy='view-all'
+                  >
                     View All
                   </Link>
                 </Col>
@@ -107,7 +111,7 @@ const HomeScreen = ({ match }) => {
       ) : (
         (keyword || match.url !== '/') && (
           <>
-            <Link to='/' className='btn btn-dark'>
+            <Link to='/' className='btn btn-dark' data-cy='back-btn'>
               GO BACK
             </Link>
 
@@ -119,7 +123,14 @@ const HomeScreen = ({ match }) => {
               <>
                 <Row>
                   {products.map((product) => (
-                    <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
+                    <Col
+                      sm={12}
+                      md={6}
+                      lg={4}
+                      xl={3}
+                      key={product._id}
+                      data-cy='product-all'
+                    >
                       <Product product={product} redirect={match.url} />
                     </Col>
                   ))}

@@ -7,6 +7,9 @@ import { setupServer } from 'msw/node';
 import { testRender, makeTestStore } from '../../reduxTestUtils';
 import LoginScreen from '../LoginScreen';
 
+// Jest mock implementation of window.scrollTo
+global.scrollTo = () => true;
+
 // Need this component in order to update the state
 // because current LoginScreen doesn't have userLogin to render on screen
 function DisplayState() {

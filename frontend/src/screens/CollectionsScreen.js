@@ -49,7 +49,14 @@ const CollectionsScreen = ({ match }) => {
         <>
           <Row>
             {products.map((product) => (
-              <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
+              <Col
+                sm={12}
+                md={6}
+                lg={4}
+                xl={3}
+                key={product._id}
+                data-cy={`product-collection-${match.params.collection}`}
+              >
                 <Product product={product} redirect={match.url} />
               </Col>
             ))}

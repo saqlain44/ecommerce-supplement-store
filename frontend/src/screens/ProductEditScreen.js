@@ -7,7 +7,10 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { listProductDetails, updateProduct } from '../actions/productActions';
-import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
+import {
+  PRODUCT_DETAILS_RESET,
+  PRODUCT_UPDATE_RESET,
+} from '../constants/productConstants';
 
 const ProductEditScreen = ({ history, match }) => {
   const productId = match.params.id;
@@ -32,6 +35,10 @@ const ProductEditScreen = ({ history, match }) => {
     error: errorUpdate,
     success: successUpdate,
   } = productUpdate;
+
+  useEffect(() => {
+    return () => dispatch({ type: PRODUCT_DETAILS_RESET });
+  }, [dispatch]);
 
   useEffect(() => {
     if (successUpdate) {
@@ -113,6 +120,7 @@ const ProductEditScreen = ({ history, match }) => {
                 placeholder='Name'
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                data-cy='form-name'
               ></Form.Control>
             </Form.Group>
 
@@ -123,6 +131,7 @@ const ProductEditScreen = ({ history, match }) => {
                 placeholder='Enter price'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+                data-cy='form-price'
               ></Form.Control>
             </Form.Group>
 
@@ -133,6 +142,7 @@ const ProductEditScreen = ({ history, match }) => {
                 placeholder='Enter count in stock'
                 value={countInStock}
                 onChange={(e) => setCountInStock(e.target.value)}
+                data-cy='form-count'
               ></Form.Control>
             </Form.Group>
 
@@ -161,6 +171,7 @@ const ProductEditScreen = ({ history, match }) => {
                 placeholder='Enter brand'
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
+                data-cy='form-brand'
               ></Form.Control>
             </Form.Group>
 
@@ -171,6 +182,7 @@ const ProductEditScreen = ({ history, match }) => {
                 placeholder='Enter category'
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+                data-cy='form-category'
               ></Form.Control>
             </Form.Group>
 
@@ -181,10 +193,16 @@ const ProductEditScreen = ({ history, match }) => {
                 placeholder='Enter description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                data-cy='form-description'
               ></Form.Control>
             </Form.Group>
 
-            <Button type='submit' variant='primary' className='btn-block'>
+            <Button
+              type='submit'
+              variant='primary'
+              className='btn-block'
+              data-cy='btn-update'
+            >
               Update
             </Button>
           </Form>

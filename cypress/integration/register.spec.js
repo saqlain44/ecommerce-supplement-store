@@ -32,6 +32,6 @@ describe('Register', () => {
     cy.get('.btn').contains('Register').click();
 
     cy.location('pathname').should('equal', '/');
-    cy.get('.dropdown').contains(username).should('be.visible');
+    cy.get('[data-cy=username]').should('be.visible');
   });
 });

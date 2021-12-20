@@ -78,6 +78,7 @@ const ProfileScreen = ({ history }) => {
               placeholder='Enter Name'
               value={name}
               onChange={(e) => setName(e.target.value)}
+              data-cy='form-name'
             ></Form.Control>
           </Form.Group>
 
@@ -88,6 +89,7 @@ const ProfileScreen = ({ history }) => {
               placeholder='Enter Email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              data-cy='form-email'
             ></Form.Control>
           </Form.Group>
 
@@ -111,7 +113,12 @@ const ProfileScreen = ({ history }) => {
             ></Form.Control>
           </Form.Group>
 
-          <Button type='submit' variant='primary' className='btn-block'>
+          <Button
+            type='submit'
+            variant='primary'
+            className='btn-block'
+            data-cy='btn-update'
+          >
             Update
           </Button>
         </Form>
@@ -137,7 +144,7 @@ const ProfileScreen = ({ history }) => {
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order._id}>
+                <tr key={order._id} data-cy='order-list'>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
                   <td>${order.totalPrice}</td>
@@ -157,7 +164,11 @@ const ProfileScreen = ({ history }) => {
                   </td>
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
-                      <Button className='btn-sm btn-block' variant='secondary'>
+                      <Button
+                        className='btn-sm btn-block'
+                        variant='secondary'
+                        data-cy='btn-details'
+                      >
                         Details
                       </Button>
                     </LinkContainer>

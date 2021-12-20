@@ -35,21 +35,31 @@ const Header = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='mr-auto'>
-              <LinkContainer to='/collections/protein'>
+              <LinkContainer
+                to='/collections/protein'
+                data-cy='nav-btn-protein'
+              >
                 <Nav.Link className='fw-bold'>Protein</Nav.Link>
               </LinkContainer>
               <NavDropdown
                 title='Essentials'
                 id='basic-nav-dropdown'
                 className='fw-bold'
+                data-cy='nav-btn-essentials'
               >
-                <LinkContainer to='/collections/bcaa'>
+                <LinkContainer to='/collections/bcaa' data-cy='nav-btn-bcaa'>
                   <NavDropdown.Item>BCAA</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to='/collections/glutamine'>
+                <LinkContainer
+                  to='/collections/glutamine'
+                  data-cy='nav-btn-glutamine'
+                >
                   <NavDropdown.Item>Glutamine</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to='/collections/creatine'>
+                <LinkContainer
+                  to='/collections/creatine'
+                  data-cy='nav-btn-creatine'
+                >
                   <NavDropdown.Item>Creatine</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
@@ -57,11 +67,15 @@ const Header = () => {
                 title='More'
                 id='basic-nav-dropdown'
                 className='fw-bold'
+                data-cy='nav-btn-more'
               >
-                <LinkContainer to='/collections/multivitamin'>
+                <LinkContainer
+                  to='/collections/multivitamin'
+                  data-cy='nav-btn-multivitamin'
+                >
                   <NavDropdown.Item>Multivitamin</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to='/collections/omega'>
+                <LinkContainer to='/collections/omega' data-cy='nav-btn-omega'>
                   <NavDropdown.Item>Omega/Fish-Oil</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
@@ -72,16 +86,23 @@ const Header = () => {
               />
               &nbsp; &nbsp; &nbsp;
               {userInfo && userInfo.isAdmin && (
-                <NavDropdown title='Admin' id='adminmenu'>
-                  <LinkContainer to='/admin/userlist'>
+                <NavDropdown
+                  title='Admin'
+                  id='adminmenu'
+                  data-cy='nav-btn-admin'
+                >
+                  <LinkContainer to='/admin/userlist' data-cy='nav-btn-users'>
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
 
-                  <LinkContainer to='/admin/productlist'>
+                  <LinkContainer
+                    to='/admin/productlist'
+                    data-cy='nav-btn-products'
+                  >
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
 
-                  <LinkContainer to='/admin/orderlist'>
+                  <LinkContainer to='/admin/orderlist' data-cy='nav-btn-orders'>
                     <NavDropdown.Item>Orders</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
@@ -92,9 +113,12 @@ const Header = () => {
                     <i className='fas fa-user' style={{ fontSize: '22px' }}></i>
                   }
                   id='username'
+                  data-cy='username'
                 >
-                  <LinkContainer to='/profile'>
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <LinkContainer to='/profile' data-cy='nav-profile'>
+                    <NavDropdown.Item data-cy='profile'>
+                      Profile
+                    </NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item onClick={logoutHandler}>
                     Logout
@@ -107,7 +131,7 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
-              <LinkContainer to='/cart'>
+              <LinkContainer to='/cart' data-cy='nav-btn-cart'>
                 <Nav.Link>
                   <span className='fw-bold'>Cart &nbsp; / &nbsp;</span>
                   {cartItems && cartItems.length > 0 && (

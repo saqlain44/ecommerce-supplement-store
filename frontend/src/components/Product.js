@@ -21,7 +21,7 @@ const Product = ({ product, redirect }) => {
           style={{ textDecoration: 'none' }}
         >
           <Card.Title>
-            <h5 className='fs-bold'>{product.name}</h5>
+            <h5 className='fs-bold' data-cy='product-name'>{product.name}</h5>
           </Card.Title>
         </Link>
         <Card.Text as='div'>

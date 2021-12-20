@@ -45,7 +45,12 @@ const PaymentScreen = ({ history }) => {
           </Col>
         </Form.Group>
 
-        <Button type='submit' variant='primary' className='my-3'>
+        <Button
+          type='submit'
+          variant='primary'
+          className='my-3'
+          data-cy='btn-continue'
+        >
           Countinue
         </Button>
       </Form>
