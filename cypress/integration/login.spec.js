@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('BlogSnippet login', () => {
+describe('site login', () => {
   before(() => {
     // Clean up database
     cy.exec('npm run data-test:destroy');
