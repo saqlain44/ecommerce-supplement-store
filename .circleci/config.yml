@@ -11,7 +11,7 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - run:
-          command: sudo apt update
+          command: apt-get install sudo -y
       - run:
           name: Demonstrate that Mongo DB is available as localhost
           command: |
