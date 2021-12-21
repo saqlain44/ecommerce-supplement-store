@@ -4,7 +4,7 @@ const config = {
   moduleDirectories: ['node_modules'],
   modulePathIgnorePatterns: ['<rootDir>/frontend'],
   testEnvironment: 'node',
-  testMatch: ['**/userRoutes*test*'],
+  testMatch: ['**/*test*'],
 };
 
 module.exports = config;
