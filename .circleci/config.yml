@@ -3,13 +3,15 @@ version: 2.1
 jobs:
   build-and-test:
     docker:
-      - image: cypress/base:14.15.0
+      - image: cypress/base:16.1.0
       - image: circleci/mongo:4.2
         environment:
           MONGO_USERNAME: mongouser
           MONGO_PASSWORD: mongopass
     steps:
       # Checkout the code as the first step.
+      - run:
+          command: sudo apt update
       - run:
           name: Demonstrate that Mongo DB is available as localhost
           command: |
