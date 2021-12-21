@@ -10,7 +10,9 @@ jobs:
           MONGO_PASSWORD: mongopass
     steps:
       # Checkout the code as the first step.
+      - checkout
       - run:
+          name: Install sudo
           command: |
             apt-get update
             apt-get install sudo -y
@@ -22,9 +24,47 @@ jobs:
             sudo apt update
             sudo apt install mongodb-org -y
             mongo localhost --eval 'db.serverStatus()'
-      
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "frontend/package-lock.json"}}
+            - node-deps-v1-
+      - run:
+          name: Install packages frontend
+          command: |
+            ls
+            cd frontend
+            npm install
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - frontend/node_modules
+      - restore_cache:
+          keys:
+            - backend-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+            - backend-v1-
+      - run:
+          name: Install packages backend
+          command: |
+            ls
+            npm install
+      - save_cache:
+          key: backend-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - node_modules
+            - /home/circleci/.cache/Cypress
+            - /root/.cache/Cypress
+      - run:
+          name: Run test dev servers
+          command: npm run dev-test
+          background: true
+      - run:
+          name: Run test
+          command: npm run test
+      - run:
+          name: Run cypress test
+          command: npx cypress run
 
 workflows:
-  sample:
+  test-and-deploy:
     jobs:
       - build-and-test
