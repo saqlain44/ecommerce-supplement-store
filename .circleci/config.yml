@@ -8,7 +8,7 @@ jobs:
         environment:
           MONGO_USERNAME: mongouser
           MONGO_PASSWORD: mongopass
-    parallelism: 4
+
     steps:
       # Checkout the code as the first step.
       - checkout
@@ -63,7 +63,7 @@ jobs:
           command: npm run test
       - run:
           name: Run cypress test
-          command: npx cypress run --parallel
+          command: npx cypress run
 
 workflows:
   test-and-deploy:
