@@ -10,7 +10,7 @@ jobs:
           MONGO_PASSWORD: mongopass
     steps:
       # Checkout the code as the first step.
-      - run: apt-get install -y sudo
+      - run: sudo apt update
       - run:
           name: Demonstrate that Mongo DB is available as localhost
           command: |
