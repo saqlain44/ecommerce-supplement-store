@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import FormContainer from '../components/FormContainer';
+import Meta from '../components/Meta';
 import { saveShippingAddress } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 
@@ -31,6 +32,7 @@ const ShippingScreen = ({ history }) => {
 
   return (
     <FormContainer>
+      <Meta title='Nutrition-Strat Shipping'/>
       <CheckoutSteps step1 step2 />
       <h4 className='mb-3'>SHIPPING ADDRESSS</h4>
       <Form onSubmit={submitHandler}>

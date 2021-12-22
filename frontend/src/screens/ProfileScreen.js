@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions';
 
@@ -64,6 +65,7 @@ const ProfileScreen = ({ history }) => {
 
   return (
     <Row>
+      <Meta title='Nutrition-Strat User-Profile'/>
       <Col md={3}>
         <h4>USER PROFILE</h4>
         {message && <Message>{message}</Message>}

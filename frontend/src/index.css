@@ -86,7 +86,7 @@ main {
 .carousel-control-next-icon:after {
   font-family: 'Font Awesome\ 5 Free';
   content: '\f054';
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 900; /* Fix version 5.0.9 */
   color: teal;
 }
@@ -94,7 +94,7 @@ main {
 .carousel-control-prev-icon:after {
   font-family: 'Font Awesome\ 5 Free';
   content: '\f053';
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 900; /* Fix version 5.0.9 */
   color: teal;
 }
@@ -108,7 +108,7 @@ main {
   background-color: #fff;
 }
 
-.carousel-caption h2 {
+.carousel-caption h3 {
   color: teal;
 }
 

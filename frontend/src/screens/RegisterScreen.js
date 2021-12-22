@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import { register } from '../actions/userActions';
 
 const RegisterScreen = ({ location, history }) => {
@@ -41,6 +42,7 @@ const RegisterScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
+      <Meta title='Nutrition-Strat Register'/>
       <h4>Sign Up</h4>
       {message && <Message>{message}</Message>}
       {error && <Message>{error}</Message>}

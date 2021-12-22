@@ -71,19 +71,19 @@ const Footer = () => {
           <Col md={3} className='py-2'>
             <h5 className='fw-bold'>Choose Shop Location</h5>
             <Image
-              src='https://flagcdn.com/h20/us.png'
+              src='images/flags/us.png'
               height='20'
               alt='United States'
               className='mx-1'
             />
             <Image
-              src='https://flagcdn.com/h20/ca.png'
+              src='images/flags/ca.png'
               height='20'
               alt='Canada'
               className='mx-1'
             />
             <Image
-              src='https://flagcdn.com/h20/au.png'
+              src='images/flags/au.png'
               height='20'
               alt='Australia'
               className='mx-1'
@@ -94,38 +94,38 @@ const Footer = () => {
           <Col>
             <h6 className='fw-bold'>We Accept</h6>
             <Image
-              src='https://bbcom-stage-content-cache.s3-us-west-2.amazonaws.com/www.bodybuilding.com/pages/rebrand-2021/Visa.bb1ce184.svg'
+              src='images/cards/Visa.bb1ce184.svg'
               height='30'
               width='47'
               alt='Visa'
               className='mx-1'
             />
             <Image
-              src='https://bbcom-stage-content-cache.s3-us-west-2.amazonaws.com/www.bodybuilding.com/pages/rebrand-2021/AmericanExpress.061b2277.svg'
+              src='images/cards/AmericanExpress.061b2277.svg'
               height='30'
               width='47'
               alt='American Express'
               className='mx-1'
             />
             <Image
-              src='https://bbcom-stage-content-cache.s3-us-west-2.amazonaws.com/www.bodybuilding.com/pages/rebrand-2021/Mastercard.65fc81f2.svg'
+              src='images/cards/Mastercard.65fc81f2.svg'
               height='30'
               width='47'
               alt='Mastercard'
               className='mx-1'
             />
             <Image
-              src='https://bbcom-stage-content-cache.s3-us-west-2.amazonaws.com/www.bodybuilding.com/pages/rebrand-2021/Discover.cbf6c6e1.svg'
+              src='images/cards/Discover.cbf6c6e1.svg'
               height='30'
               width='47'
               alt='Discover'
               className='mx-1'
             />
             <Image
-              src='https://bbcom-stage-content-cache.s3-us-west-2.amazonaws.com/www.bodybuilding.com/pages/rebrand-2021/Paypal.eae00b48.svg'
+              src='images/cards/Paypal.eae00b48.svg'
               height='30'
               width='47'
-              alt='Discover'
+              alt='PayPal'
               className='mx-1'
             />
           </Col>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel, Image } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,6 +12,12 @@ const ProductCarousel = () => {
   const productTopRated = useSelector((state) => state.productTopRated);
   const { loading, error, products } = productTopRated;
 
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
   useEffect(() => {
     dispatch(listTopProducts());
   }, [dispatch]);
@@ -21,16 +27,22 @@ const ProductCarousel = () => {
   ) : error ? (
     <Message variant='danger'>{error}</Message>
   ) : (
-    <Carousel pause='hover' className='carousel-bg' data-cy='carousel'>
+    <Carousel
+      pause='hover'
+      className='carousel-bg'
+      data-cy='carousel'
+      activeIndex={index}
+      onSelect={handleSelect}
+    >
       {products &&
         products.map((product) => (
           <Carousel.Item key={product._id}>
             <Link to={`/products/${product._id}`}>
               <Image src={product.image} alt={product.name} fluid />
               <Carousel.Caption className='carousel-caption'>
-                <h2>
+                <h3>
                   {product.name} (${product.price})
-                </h2>
+                </h3>
               </Carousel.Caption>
             </Link>
           </Carousel.Item>

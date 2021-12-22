@@ -13,6 +13,7 @@ import {
 
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
+import Meta from '../components/Meta';
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -45,6 +46,7 @@ const CartScreen = ({ match, location, history }) => {
 
   return (
     <Row>
+      <Meta title='Nutrition-Strat Cart'/>
       <h4 className='shopping-cart-title fw-bold'>Shopping Cart</h4>
       <Col md={8}>
         {cartItems.length === 0 ? (

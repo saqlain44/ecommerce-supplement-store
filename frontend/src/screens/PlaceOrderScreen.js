@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CheckoutSteps from '../components/CheckoutSteps';
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 import { createOrder } from '../actions/orderActions';
 import {ORDER_CREATE_RESET, ORDER_DETAILS_RESET} from '../constants/orderConstants';
 import {
@@ -61,6 +62,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <>
+      <Meta title='Nutrition-Strat Place Order'/>
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>

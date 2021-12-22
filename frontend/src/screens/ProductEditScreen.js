@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import FormContainer from '../components/FormContainer';
 import { listProductDetails, updateProduct } from '../actions/productActions';
 import {
@@ -100,6 +101,7 @@ const ProductEditScreen = ({ history, match }) => {
 
   return (
     <>
+      <Meta title='Nutrition-Strat Edit Product'/>
       <Link to='/admin/productlist' className='btn btn-dark my-3'>
         Go Back
       </Link>

@@ -18,7 +18,7 @@
     "data:destroy": "node backend/seeder -d",
     "data-test:import": "cross-env NODE_ENV=test node backend/seeder",
     "data-test:destroy": "cross-env NODE_ENV=test node backend/seeder -d",
-    "build": "cross-env INLINE_RUNTIME_CHUNK=false npm run build --prefix frontend",
+    "build": "cross-env INLINE_RUNTIME_CHUNK=false npm run build --prefix frontend && cp -r ./api-docs ./frontend/build/",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build"
   },
   "repository": {

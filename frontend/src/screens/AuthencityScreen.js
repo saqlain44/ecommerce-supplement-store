@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Col, Row, ListGroup } from 'react-bootstrap';
+import Meta from '../components/Meta';
 
 const AuthencityScreen = () => {
   useEffect(() => {
@@ -8,6 +9,7 @@ const AuthencityScreen = () => {
 
   return (
     <>
+      <Meta title='Nutrition-Strat Authenticity'/>
       <Row className='text-center py-2'>
         <Col className='px-0'>
           <div

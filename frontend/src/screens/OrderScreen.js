@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import {
   getOrderDetails,
   payOrder,
@@ -98,6 +99,7 @@ const OrderScreen = ({ match, history }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
+          <Meta title='Nutrition-Strat Order'/>
           <Col>
             <ListGroup variant='flush'>
               <ListGroup.Item>

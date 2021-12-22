@@ -31,7 +31,11 @@ module.exports = () => {
     app.use(mongoSanitize());
 
     // Set security headers
-    app.use(helmet());
+    app.use(
+      helmet({
+        contentSecurityPolicy: false,
+      })
+    );
 
     // Prevent XSS attacks
     app.use(xss());
@@ -39,7 +43,7 @@ module.exports = () => {
     // Rate limiting
     const limiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 100, // limit each IP to 100 request per windowMs
+      max: 200, // limit each IP to 100 request per windowMs
     });
 
     // Apply to all requests

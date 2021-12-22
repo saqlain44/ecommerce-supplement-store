@@ -133,18 +133,6 @@ const Header = () => {
               )}
               <LinkContainer to='/cart' data-cy='nav-btn-cart'>
                 <Nav.Link>
-                  <span className='fw-bold'>Cart &nbsp; / &nbsp;</span>
-                  {cartItems && cartItems.length > 0 && (
-                    <>
-                      <span className='fw-bold'>
-                        $
-                        {cartItems
-                          .reduce((acc, item) => acc + item.qty * item.price, 0)
-                          .toFixed(2)}
-                      </span>
-                      &nbsp;{' '}
-                    </>
-                  )}
                   <i className='fas fa-shopping-cart'></i>
                   {cartItems && cartItems.length > 0 && (
                     <div
@@ -167,6 +155,17 @@ const Header = () => {
                         {cartItems.length}
                       </span>
                     </div>
+                  )}
+                  {cartItems && cartItems.length > 0 && (
+                    <>
+                      <span className='fw-bold'>
+                        / $
+                        {cartItems
+                          .reduce((acc, item) => acc + item.qty * item.price, 0)
+                          .toFixed(2)}
+                      </span>
+                      &nbsp;{' '}
+                    </>
                   )}
                 </Nav.Link>
               </LinkContainer>

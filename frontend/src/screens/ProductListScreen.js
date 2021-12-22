@@ -4,6 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 
 import Paginate from '../components/Paginate';
 import {
@@ -77,6 +78,7 @@ const ProductListScreen = ({ history, match }) => {
 
   return (
     <>
+      <Meta title='Nutrition-Strat Product-List'/>
       <Row className='align-items-center'>
         <Col>
           <h2>Products</h2>

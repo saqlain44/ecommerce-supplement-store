@@ -7,6 +7,7 @@ import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { login } from '../actions/userActions';
+import Meta from '../components/Meta';
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('');
@@ -35,6 +36,7 @@ const LoginScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
+      <Meta title='Nutrition-Strat Login'/>
       <h4 data-cy='sign-in'>Sign In</h4>
       {error && <Message>{error}</Message>}
       {loading && <Loader />}
