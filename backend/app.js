@@ -2,6 +2,12 @@ const path = require('path');
 
 const express = require('express');
 const morgan = require('morgan');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+const cors = require('cors');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const { errorHandler, notFound } = require('./middleware/errorMiddleware');
 const productRoutes = require('./routes/productRoutes');
@@ -18,6 +24,32 @@ module.exports = () => {
   // Run morgan logger in dev mode
   if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    // Sanitize incoming data
+    app.use(mongoSanitize());
+
+    // Set security headers
+    app.use(helmet());
+
+    // Prevent XSS attacks
+    app.use(xss());
+
+    // Rate limiting
+    const limiter = rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 100, // limit each IP to 100 request per windowMs
+    });
+
+    // Apply to all requests
+    app.use(limiter);
+
+    // Prevent http params pollution
+    app.use(hpp());
+
+    // Enable cors
+    app.use(cors());
   }
 
   app.use('/api/products', productRoutes);

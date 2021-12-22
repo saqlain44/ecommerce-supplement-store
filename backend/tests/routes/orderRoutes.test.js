@@ -4,6 +4,8 @@ const Product = require('../../models/productModel');
 const User = require('../../models/userModel');
 const Context = require('../context');
 
+jest.setTimeout(30000);
+
 let context;
 
 let normalUser;
