@@ -199,6 +199,7 @@ const ProductScreen = ({ match, history, location }) => {
                             as='select'
                             value={rating}
                             onChange={(e) => setRating(e.target.value)}
+                            data-cy='form-select'
                           >
                             <option value=''>Select...</option>
                             <option value='1'>1 - Poor</option>
@@ -215,9 +216,10 @@ const ProductScreen = ({ match, history, location }) => {
                             as='textarea'
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
+                            data-cy='form-comment'
                           ></Form.Control>
                         </Form.Group>
-                        <Button type='submit'>Submit</Button>
+                        <Button type='submit' data-cy='btn-submit'>Submit</Button>
                       </Form>
                     ) : (
                       <Message time={300000}>
