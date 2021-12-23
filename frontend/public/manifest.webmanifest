@@ -44,17 +44,17 @@
   "categories": ["ecommerce"],
   "screenshots": [
     {
-      "src": "screenshot1.png",
+      "src": "Screenshot1.png",
       "sizes": "540x720",
       "type": "image/png"
     },
     {
-      "src": "screenshot2.png",
+      "src": "Screenshot2.png",
       "sizes": "540x720",
       "type": "image/png"
     },
     {
-      "src": "screenshot3.png",
+      "src": "Screenshot3.png",
       "sizes": "540x720",
       "type": "image/png"
     }
