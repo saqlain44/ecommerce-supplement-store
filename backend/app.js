@@ -1,7 +1,6 @@
 const path = require('path');
 
 const express = require('express');
-const morgan = require('morgan');
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
@@ -23,6 +22,7 @@ module.exports = () => {
 
   // Run morgan logger in dev mode
   if (process.env.NODE_ENV === 'development') {
+    const morgan = require('morgan');
     app.use(morgan('dev'));
   }
 
