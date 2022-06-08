@@ -8,6 +8,7 @@ __node_modules
 __node_modules/
 /.pnp
 .pnp.js
+db
 
 # testing
 /coverage
