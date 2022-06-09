@@ -17,7 +17,9 @@ class Context {
     // Randomly generating a testDB name
     const dbName = 'nutristrat_test' + randomBytes(4).toString('hex');
 
-    const mongoUri = `mongodb://localhost/${dbName}`;
+    const dbHost = process.env.DB_HOST || 'localhost';
+
+    const mongoUri = `mongodb://${dbHost}/${dbName}`;
     try {
       const conn = await mongoose.connect(mongoUri, {
         useUnifiedTopology: true,
