@@ -9,14 +9,13 @@ import { useFetchProductLatestListQuery } from './productApiSlice';
 
 const LatestProducts = () => {
   const { data, error, isLoading, isError } = useFetchProductLatestListQuery();
-  console.log(data);
 
   if (isLoading) {
     return <Loader />;
   }
 
   if (isError) {
-    <ErrorMessage error={error} />;
+    return <ErrorMessage error={error} />;
   }
 
   return (

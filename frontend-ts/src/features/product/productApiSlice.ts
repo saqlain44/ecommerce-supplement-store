@@ -28,6 +28,12 @@ export interface ProductLatestList {
   products: Product[];
 }
 
+export interface ProductTrendingList {
+  products: Product[];
+}
+
+type TrendingProduct = 'protein' | 'bcaa';
+
 export const productListApiSlice = createApi({
   reducerPath: 'productListApi',
   baseQuery: fetchBaseQuery({
@@ -35,9 +41,9 @@ export const productListApiSlice = createApi({
   }),
   endpoints(builder) {
     return {
-      fetchProductList: builder.query<ProductList, number | void>({
-        query(page = 1) {
-          return `?category=&pageNumber=${page}`;
+      fetchProductList: builder.query<ProductList, { keyword?: string; page?: number }>({
+        query({ keyword = '', page = 1}) {
+          return `?category=${keyword}&pageNumber=${page}`;
         },
       }),
 
@@ -52,9 +58,22 @@ export const productListApiSlice = createApi({
           return '/latest';
         },
       }),
+
+      fetchProductTrendingList: builder.query<
+        ProductTrendingList,
+        TrendingProduct
+      >({
+        query(category) {
+          return `/trending?category=${category}`;
+        },
+      }),
     };
   },
 });
 
-export const { useFetchProductListQuery, useFetchProductTopListQuery, useFetchProductLatestListQuery } =
-  productListApiSlice;
+export const {
+  useFetchProductListQuery,
+  useFetchProductTopListQuery,
+  useFetchProductLatestListQuery,
+  useFetchProductTrendingListQuery,
+} = productListApiSlice;
