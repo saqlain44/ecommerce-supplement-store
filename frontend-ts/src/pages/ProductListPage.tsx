@@ -2,7 +2,7 @@ import React from 'react';
 
 import ProductList from '../features/product/ProductList';
 
-const Products = () => {
+const ProductListPage = () => {
   return (
     <>
       <h4>ProductList</h4>
@@ -10,4 +10,4 @@ const Products = () => {
     </>
   );
 };
-export default Products;
+export default ProductListPage;

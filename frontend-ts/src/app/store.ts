@@ -1,13 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import { productListApiSlice } from '../features/product/productApiSlice';
+import { productApiSlice } from '../features/product/productApiSlice';
 
 export const store = configureStore({
   reducer: {
-    [productListApiSlice.reducerPath]: productListApiSlice.reducer,
+    [productApiSlice.reducerPath]: productApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(productListApiSlice.middleware);
+    return getDefaultMiddleware().concat(productApiSlice.middleware);
   },
 });
 

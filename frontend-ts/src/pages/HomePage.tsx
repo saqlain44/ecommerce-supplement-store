@@ -10,7 +10,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { useFetchProductListQuery } from '../features/product/productApiSlice';
 import ProductList from '../features/product/ProductList';
 
-const Home = () => {
+const HomePage = () => {
   const dispatch = useAppDispatch();
   const { data } = useFetchProductListQuery({});
   const location = useLocation();
@@ -36,4 +36,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

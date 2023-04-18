@@ -34,16 +34,16 @@ export interface ProductTrendingList {
 
 type TrendingProduct = 'protein' | 'bcaa';
 
-export const productListApiSlice = createApi({
-  reducerPath: 'productListApi',
+export const productApiSlice = createApi({
+  reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({
     baseUrl: '/api/products',
   }),
   endpoints(builder) {
     return {
-      fetchProductList: builder.query<ProductList, { keyword?: string; page?: number }>({
-        query({ keyword = '', page = 1}) {
-          return `?category=${keyword}&pageNumber=${page}`;
+      fetchProductList: builder.query<ProductList, { keyword?: string; page?: number; category?: string; }>({
+        query({ keyword = '', page = 1, category = ''}) {
+          return `?category=${category}&pageNumber=${page}&keyword=${keyword}`;
         },
       }),
 
@@ -67,6 +67,12 @@ export const productListApiSlice = createApi({
           return `/trending?category=${category}`;
         },
       }),
+
+      fetchProductDetail: builder.query<Product, string>({
+        query(id) {
+          return `/${id}`;
+        },
+      }),
     };
   },
 });
@@ -76,4 +82,5 @@ export const {
   useFetchProductTopListQuery,
   useFetchProductLatestListQuery,
   useFetchProductTrendingListQuery,
-} = productListApiSlice;
+  useFetchProductDetailQuery,
+} = productApiSlice;

@@ -15,10 +15,12 @@ const ProductList = () => {
 
   const page = parseInt(params.pageNumber || '1');
   const keyword = params.keyword || '';
+  const category = params.collection || '';
 
   const { isLoading, isError, error, data } = useFetchProductListQuery({
     keyword,
     page,
+    category,
   });
 
   if (isLoading) {
