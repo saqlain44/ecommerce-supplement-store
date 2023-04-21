@@ -24,8 +24,21 @@ export const userApiSlice = createApi({
           };
         },
       }),
+
+      registerUser: builder.mutation<
+        User,
+        { name: string; email: string; password: string }
+      >({
+        query({ name, email, password }) {
+          return {
+            url: '/',
+            method: 'POST',
+            body: { name, email, password },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useFetchUserMutation } = userApiSlice;
+export const { useFetchUserMutation, useRegisterUserMutation } = userApiSlice;

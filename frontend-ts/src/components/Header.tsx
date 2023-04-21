@@ -2,7 +2,19 @@ import React from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { setUser } from '../features/auth/authSlice';
+
+// TODO: searchbox, cart
+
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.auth.user);
+
+  const logoutHandler = () => {
+    dispatch(setUser(null));
+  };
+
   return (
     <header>
       <Navbar
@@ -63,6 +75,56 @@ const Header = () => {
                   <NavDropdown.Item>Omega/Fish-Oil</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
+            </Nav>
+
+            <Nav className="ml-auto nav-right-items">
+              &nbsp; &nbsp; &nbsp;
+              {user && user.isAdmin && (
+                <NavDropdown
+                  title="Admin"
+                  id="adminmenu"
+                  data-cy="nav-btn-admin"
+                >
+                  <LinkContainer to="/admin/userlist" data-cy="nav-btn-users">
+                    <NavDropdown.Item>Users</NavDropdown.Item>
+                  </LinkContainer>
+
+                  <LinkContainer
+                    to="/admin/productlist"
+                    data-cy="nav-btn-products"
+                  >
+                    <NavDropdown.Item>Products</NavDropdown.Item>
+                  </LinkContainer>
+
+                  <LinkContainer to="/admin/orderlist" data-cy="nav-btn-orders">
+                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
+              {user ? (
+                <NavDropdown
+                  title={
+                    <i className="fas fa-user" style={{ fontSize: '22px' }}></i>
+                  }
+                  id="username"
+                  data-cy="username"
+                >
+                  <LinkContainer to="/profile" data-cy="nav-profile">
+                    <NavDropdown.Item data-cy="profile">
+                      Profile
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <LinkContainer to="/login">
+                  <Nav.Link>
+                    <i className="fas fa-user"></i> Sign-in
+                  </Nav.Link>
+                </LinkContainer>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
