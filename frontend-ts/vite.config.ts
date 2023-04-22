@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react-swc';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000,
+    port: 5005,
     proxy: {
       '/api': {
         // API_HOST is used when running on docker
