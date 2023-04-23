@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
+import CartPage from './pages/CartPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -40,6 +41,8 @@ function App() {
               element={<ProductListPage />}
             />
             <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="/cart/:productId" element={<CartPage />} />
+            <Route path="/cart" element={<CartPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/profile" element={<ProfilePage />} />
