@@ -4,12 +4,14 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { setUser } from '../features/auth/authSlice';
+import SearchBox from './SearchBox';
 
-// TODO: searchbox, cart
+// TODO: searchbox
 
 const Header = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
+  const cartItems = useAppSelector(state => state.cart.cartItems);
 
   const logoutHandler = () => {
     dispatch(setUser(null));
@@ -78,6 +80,7 @@ const Header = () => {
             </Nav>
 
             <Nav className="ml-auto nav-right-items">
+              <SearchBox />
               &nbsp; &nbsp; &nbsp;
               {user && user.isAdmin && (
                 <NavDropdown
@@ -125,6 +128,44 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
+              <LinkContainer to='/cart' data-cy='nav-btn-cart'>
+                <Nav.Link>
+                  <i className='fas fa-shopping-cart'></i>
+                  {cartItems && cartItems.length > 0 && (
+                    <div
+                      className='bg-danger text-center'
+                      style={{
+                        borderRadius: '50%',
+                        height: '18px',
+                        width: '18px',
+                        display: 'inline-block',
+                      }}
+                    >
+                      <span
+                        className='text-center fw-bold'
+                        style={{
+                          position: 'relative',
+                          top: '-5px',
+                          fontSize: '12px',
+                        }}
+                      >
+                        {cartItems.length}
+                      </span>
+                    </div>
+                  )}
+                  {cartItems && cartItems.length > 0 && (
+                    <>
+                      <span className='fw-bold'>
+                        / $
+                        {cartItems
+                          .reduce((acc, item) => acc + item.qty * item.price, 0)
+                          .toFixed(2)}
+                      </span>
+                      &nbsp;{' '}
+                    </>
+                  )}
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>
