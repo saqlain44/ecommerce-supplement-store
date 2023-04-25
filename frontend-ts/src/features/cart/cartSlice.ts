@@ -21,11 +21,12 @@ type ShippingAddress = {
 interface CartState {
   cartItems?: CartItem[] | null;
   shippingAddress?: ShippingAddress | null;
+  paymentMethod?: string | null;
 }
 
 const initialState: CartState = cart
   ? JSON.parse(cart)
-  : { cartItems: null, shippingAddress: null };
+  : { cartItems: null, shippingAddress: null, paymentMethod: null };
 
 const updateLocalStorage = (cart: CartState) => {
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -35,7 +36,6 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // TODO: localStorage
     addItem(state, action: PayloadAction<CartItem>) {
       const item = action.payload;
       // check of the state.cartItems is null
@@ -80,6 +80,11 @@ const cartSlice = createSlice({
       state.shippingAddress = null;
       updateLocalStorage(state);
     },
+
+    savePaymentMethod(state, action: PayloadAction<string>) {
+      state.paymentMethod = action.payload;
+      updateLocalStorage(state);
+    },
   },
 });
 
@@ -89,5 +94,6 @@ export const {
   saveShippingAddress,
   cartResetItems,
   cartResetAll,
+  savePaymentMethod,
 } = cartSlice.actions;
 export default cartSlice.reducer;

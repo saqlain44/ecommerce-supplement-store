@@ -6,6 +6,7 @@ import Header from './components/Header';
 import CartPage from './pages/CartPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import PaymentPage from './pages/PaymentPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ProductListPage from './pages/ProductListPage';
 import ProfilePage from './pages/ProfilePage';
@@ -45,6 +46,7 @@ function App() {
             <Route path="/cart/:productId" element={<CartPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/shipping" element={<ShippingPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/profile" element={<ProfilePage />} />

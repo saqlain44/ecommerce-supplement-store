@@ -6,8 +6,6 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { setUser } from '../features/auth/authSlice';
 import SearchBox from './SearchBox';
 
-// TODO: searchbox
-
 const Header = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
