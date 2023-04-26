@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../app/hooks';
+import MyOrders from '../features/order/MyOrders';
 import UserProfileForm from '../features/user/UserProfileForm';
 
 const ProfilePage = () => {
@@ -24,8 +25,8 @@ const ProfilePage = () => {
       </Col>
 
       <Col md={9}>
-        {/* TODO: MYORDERS */}
         <h4>MY ORDERS</h4>
+        <MyOrders />
       </Col>
     </Row>
   );

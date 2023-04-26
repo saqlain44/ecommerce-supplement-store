@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {RootState} from '../../app/store';
+import { RootState } from '../../app/store';
 
 export interface User {
   _id: string;
@@ -54,7 +54,10 @@ export const userApiSlice = createApi({
         },
       }),
 
-      updateUserProfile: builder.mutation<User, {name?: string; email?:string, password?: string}>({
+      updateUserProfile: builder.mutation<
+        User,
+        { name?: string; email?: string; password?: string }
+      >({
         query({ name, email, password }) {
           return {
             url: '/profile',

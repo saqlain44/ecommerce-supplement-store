@@ -4,6 +4,7 @@ import authReducer from '../features/auth/authSlice';
 import cartReducer from '../features/cart/cartSlice';
 import { productApiSlice } from '../features/product/productApiSlice';
 import { userApiSlice } from '../features/user/userApiSlice';
+import { orderApiSlice } from '../features/order/orderApiSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,11 +12,13 @@ export const store = configureStore({
     cart: cartReducer,
     [productApiSlice.reducerPath]: productApiSlice.reducer,
     [userApiSlice.reducerPath]: userApiSlice.reducer,
+    [orderApiSlice.reducerPath]: orderApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
       .concat(productApiSlice.middleware)
-      .concat(userApiSlice.middleware);
+      .concat(userApiSlice.middleware)
+      .concat(orderApiSlice.middleware);
   },
 });
 

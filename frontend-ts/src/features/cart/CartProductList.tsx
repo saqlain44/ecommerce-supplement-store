@@ -56,6 +56,17 @@ const CartProductList = ({ productId, qty = 1 }: Props) => {
     return <ErrorMessage error={error} />;
   }
 
+  if (!cartItems || cartItems.length === 0) {
+    console.log('hello');
+    return (
+      <Message time={900000}>
+        <div>
+          Your Cart is Empty <Link to="/">Go Back</Link>
+        </div>
+      </Message>
+    );
+  }
+
   return (
     <div>
       {cartItems && cartItems.length === 0 ? (
