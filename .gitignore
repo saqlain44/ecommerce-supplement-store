@@ -9,6 +9,7 @@ __node_modules/
 /.pnp
 .pnp.js
 db
+paymentDB.level
 
 # testing
 /coverage
