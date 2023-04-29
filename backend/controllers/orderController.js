@@ -1,4 +1,6 @@
+const axios = require('axios');
 const asyncHandler = require('express-async-handler');
+const { getOrderId, setPaymentId } = require('../services/levelDB');
 const Order = require('../models/orderModel');
 
 // @desc    Create new order
@@ -57,24 +59,54 @@ const getOrderById = asyncHandler(async (req, res) => {
 // @route   PUT /api/orders/:id/pay
 // @access  Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id);
+  const paymentId = req.body.id;
+  const orderId = req.params.id;
 
-  if (order) {
-    order.isPaid = true;
-    order.paidAt = Date.now();
-    order.paymentResult = {
-      id: req.body.id,
-      status: req.body.status,
-      update_time: req.body.update_time,
-      email_address: req.body.payer.email_address,
-    };
+  // Check if the payment is already processed before
+  if (await getOrderId(paymentId)) {
+    return res.status(400).send({error: 'Payment is already processed!'});
+  }
 
-    const updatedOrder = await order.save();
+  const order = await Order.findById(orderId);
 
-    res.json(updatedOrder);
-  } else {
-    res.status(404);
-    throw new Error('Order not found');
+  const clientId = process.env.PAYPAL_CLIENT_ID;
+  const secrect = process.env.PAYPAL_SECRET;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    auth: { username: clientId, password: secrect },
+  };
+
+  try {
+    const { data } = await axios.get(
+      `https://api.sandbox.paypal.com/v2/checkout/orders/${paymentId}`,
+      config
+    );
+
+    if (order && data.status === 'COMPLETED') {
+      order.isPaid = true;
+      order.paidAt = Date.now();
+      order.paymentResult = {
+        id: data.id,
+        status: data.status,
+        update_time: data.update_time,
+        email_address: data.payer.email_address,
+      };
+
+      const updatedOrder = await order.save();
+
+      // store payment id and orderid in key-value store
+      await setPaymentId(data.id, order._id);
+
+      res.json(updatedOrder);
+    } else {
+      res.status(404);
+      throw new Error('Order not found');
+    }
+  } catch (error) {
+    res.status(401);
+    res.send({ error: error.message });
   }
 });
 
