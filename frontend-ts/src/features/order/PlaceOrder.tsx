@@ -58,7 +58,7 @@ const PlaceOrder = () => {
   useEffect(() => {
     if (data) {
       dispatch(cartResetItems());
-      navigate(`/orders/${data._id}`);
+      navigate(`/order/${data._id}`);
     }
   }, [data]);
 

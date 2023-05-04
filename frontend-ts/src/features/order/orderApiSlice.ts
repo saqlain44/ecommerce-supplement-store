@@ -82,6 +82,37 @@ interface MyOrder {
   deliveredAt?: string;
 }
 
+export interface OrderDetails {
+  shippingAddress: ShippingAddress;
+  paymentResult?: {
+    id: string;
+    status: string;
+    update_time: string;
+    email_address: string;
+  };
+  taxPrice: number;
+  shippingPrice: number;
+  totalPrice: number;
+  isPaid: boolean;
+  isDelivered: boolean;
+  _id: string;
+  user: { _id: string; name: string; email: string };
+  orderItems: {
+    _id: string;
+    product: string;
+    name: string;
+    image: string;
+    price: string;
+    qty: number;
+  }[];
+  paymentMethod: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  paidAt?: string;
+  deliveredAt?: string;
+}
+
 export const orderApiSlice = createApi({
   reducerPath: 'orderApi',
   baseQuery: fetchBaseQuery({
@@ -118,8 +149,48 @@ export const orderApiSlice = createApi({
           };
         },
       }),
+
+      orderDetails: builder.query<OrderDetails, string>({
+        query(orderId) {
+          return {
+            url: `/${orderId}`,
+            method: 'GET',
+          };
+        },
+      }),
+
+      payOrder: builder.mutation<
+        OrderDetails,
+        { orderId: string; paymentId: string }
+      >({
+        query({ orderId, paymentId }) {
+          return {
+            url: `/${orderId}/pay`,
+            method: 'PUT',
+            body: { id: paymentId },
+          };
+        },
+      }),
+
+      markOrderDelivered: builder.mutation<
+        OrderDetails,
+        string
+      >({
+        query(orderId) {
+          return {
+            url: `/${orderId}/deliver`,
+            method: 'PUT',
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useCreateOrderMutation, useMyOrdersQuery } = orderApiSlice;
+export const {
+  useCreateOrderMutation,
+  useMyOrdersQuery,
+  useOrderDetailsQuery,
+  usePayOrderMutation,
+  useMarkOrderDeliveredMutation,
+} = orderApiSlice;
