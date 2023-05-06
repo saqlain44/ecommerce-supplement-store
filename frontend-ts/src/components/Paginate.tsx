@@ -18,7 +18,6 @@ const Paginate = ({
   url = '',
 }: Props) => {
   if (pages > 1) {
-    console.log('Paginate');
     return (
       <Pagination>
         {[...Array(pages).keys()].map((x) => (

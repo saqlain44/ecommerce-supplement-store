@@ -3,6 +3,10 @@ import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
+import AdminProductList from './features/product/AdminProductList';
+import AdminOrderListPage from './pages/AdminOrderListPage';
+import AdminProductEditPage from './pages/AdminProductEditPage';
+import AdminProductListPage from './pages/AdminProductListPage';
 import CartPage from './pages/CartPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -14,6 +18,8 @@ import ProductListPage from './pages/ProductListPage';
 import ProfilePage from './pages/ProfilePage';
 import RegisterPage from './pages/RegisterPage';
 import ShippingPage from './pages/ShippingPage';
+import UserEditPage from './pages/UserEditPage';
+import UserListPage from './pages/UserListPage';
 
 function App() {
   return (
@@ -54,6 +60,12 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/admin/userlist" element={<UserListPage />} />
+            <Route path='/admin/user/:id/edit' element={<UserEditPage />} />
+            <Route path='/admin/productlist' element={<AdminProductListPage />} />
+            <Route path='/admin/productlist/:pageNumber' element={<AdminProductListPage />} />
+            <Route path='/admin/product/:id/edit' element={<AdminProductEditPage />} />
+            <Route path='/admin/orderlist' element={<AdminOrderListPage />} />
           </Routes>
         </Container>
       </main>

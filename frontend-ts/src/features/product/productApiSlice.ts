@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { RootState } from '../../app/store';
+
 export interface Product {
   __v: number;
   _id: string;
@@ -38,11 +40,22 @@ export const productApiSlice = createApi({
   reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({
     baseUrl: '/api/products',
+    prepareHeaders(headers, api) {
+      const token = (api.getState() as RootState).auth.user?.token;
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
   endpoints(builder) {
     return {
-      fetchProductList: builder.query<ProductList, { keyword?: string; page?: number; category?: string; }>({
-        query({ keyword = '', page = 1, category = ''}) {
+      fetchProductList: builder.query<
+        ProductList,
+        { keyword?: string; page?: number; category?: string }
+      >({
+        query({ keyword = '', page = 1, category = '' }) {
           return `?category=${category}&pageNumber=${page}&keyword=${keyword}`;
         },
       }),
@@ -73,6 +86,36 @@ export const productApiSlice = createApi({
           return `/${id}`;
         },
       }),
+
+      createProduct: builder.mutation<Product, boolean | void>({
+        query() {
+          return { url: '/', method: 'POST' };
+        },
+      }),
+
+      updateProduct: builder.mutation<
+        Product,
+        {
+          name: string;
+          price: number;
+          image: string;
+          description: string;
+          brand: string;
+          category: string;
+          countInStock: number;
+          id: string;
+        }
+      >({
+        query(args) {
+          return { url: `/${args.id}`, method: 'PUT', body: { ...args } };
+        },
+      }),
+
+      deleteProduct: builder.mutation<string, string>({
+        query(productId) {
+          return { url: `/${productId}`, method: 'DELETE' };
+        },
+      }),
     };
   },
 });
@@ -83,4 +126,7 @@ export const {
   useFetchProductLatestListQuery,
   useFetchProductTrendingListQuery,
   useFetchProductDetailQuery,
+  useCreateProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } = productApiSlice;

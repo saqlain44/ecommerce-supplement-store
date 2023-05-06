@@ -12,6 +12,11 @@ export default defineConfig({
         target: process.env.API_HOST || 'http://localhost:8000',
         changeOrigin: true,
       },
+      '/uploads': {
+        // API_HOST is used when running on docker
+        target: process.env.API_HOST || 'http://localhost:8000',
+        changeOrigin: true,
+      },
     },
   },
 });

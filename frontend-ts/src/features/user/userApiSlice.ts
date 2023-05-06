@@ -72,6 +72,43 @@ export const userApiSlice = createApi({
           return '/profile';
         },
       }),
+
+      userList: builder.query<User[], boolean | void>({
+        query() {
+          return '/';
+        },
+      }),
+
+      fetchUserById: builder.query<User, string>({
+        query(userId) {
+          return `/${userId}`;
+        },
+      }),
+
+      updateUserById: builder.mutation<
+        User,
+        { userId: string; name?: string; email?: string; isAdmin?: boolean }
+      >({
+        query({ userId, name, email, isAdmin }) {
+          return {
+            url: `/${userId}`,
+            method: 'PUT',
+            body: { name, email, isAdmin },
+          };
+        },
+      }),
+
+      deleteUserById: builder.mutation<
+        { message: string; },
+        string
+      >({
+        query(userId) {
+          return {
+            url: `/${userId}`,
+            method: 'DELETE',
+          };
+        },
+      }),
     };
   },
 });
@@ -81,4 +118,8 @@ export const {
   useRegisterUserMutation,
   useUpdateUserProfileMutation,
   useProfileUserQuery,
+  useUserListQuery,
+  useFetchUserByIdQuery,
+  useUpdateUserByIdMutation,
+  useDeleteUserByIdMutation,
 } = userApiSlice;

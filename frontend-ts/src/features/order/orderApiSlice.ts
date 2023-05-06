@@ -159,6 +159,15 @@ export const orderApiSlice = createApi({
         },
       }),
 
+      orderList: builder.query<OrderDetails[], boolean | void>({
+        query() {
+          return {
+            url: '/',
+            method: 'GET',
+          };
+        },
+      }),
+
       payOrder: builder.mutation<
         OrderDetails,
         { orderId: string; paymentId: string }
@@ -191,6 +200,7 @@ export const {
   useCreateOrderMutation,
   useMyOrdersQuery,
   useOrderDetailsQuery,
+  useOrderListQuery,
   usePayOrderMutation,
   useMarkOrderDeliveredMutation,
 } = orderApiSlice;
