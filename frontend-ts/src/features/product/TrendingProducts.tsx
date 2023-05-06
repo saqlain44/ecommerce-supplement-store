@@ -24,20 +24,32 @@ const TrendingProducts = ({ category }: Props) => {
   }
 
   return (
-    <Row>
-      {data &&
-        data.products.map((product) => (
-          <Col
-            sm={12}
-            md={6}
-            lg={4}
-            xl={3}
-            key={product._id}
-            data-cy={`trending-${category}`}
-          >
-            <Product product={product} />
+    <Row className="p-2 my-3">
+      <Col>
+        <Row xs="auto">
+          <Col>
+            <h5 className="fw-bold">
+              <i className="fas fa-poll"></i>
+              &nbsp; TRENDING IN {`${category.toUpperCase()}`}{' '}
+            </h5>
           </Col>
-        ))}
+        </Row>
+        <Row>
+          {data &&
+            data.products.map((product) => (
+              <Col
+                sm={12}
+                md={6}
+                lg={4}
+                xl={3}
+                key={product._id}
+                data-cy={`trending-${category}`}
+              >
+                <Product product={product} />
+              </Col>
+            ))}
+        </Row>
+      </Col>
     </Row>
   );
 };

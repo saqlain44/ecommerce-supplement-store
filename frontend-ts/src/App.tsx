@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Footer from './components/Footer';
 
 import Header from './components/Header';
-import AdminProductList from './features/product/AdminProductList';
 import AdminOrderListPage from './pages/AdminOrderListPage';
 import AdminProductEditPage from './pages/AdminProductEditPage';
 import AdminProductListPage from './pages/AdminProductListPage';
+import AuthenticityPage from './pages/AuthenticityPage';
 import CartPage from './pages/CartPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -66,9 +67,11 @@ function App() {
             <Route path='/admin/productlist/:pageNumber' element={<AdminProductListPage />} />
             <Route path='/admin/product/:id/edit' element={<AdminProductEditPage />} />
             <Route path='/admin/orderlist' element={<AdminOrderListPage />} />
+            <Route path='/authenticity' element={<AuthenticityPage />} />
           </Routes>
         </Container>
       </main>
+      <Footer />
     </Router>
   );
 }
