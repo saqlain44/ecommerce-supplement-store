@@ -57,7 +57,6 @@ const CartProductList = ({ productId, qty = 1 }: Props) => {
   }
 
   if (!cartItems || cartItems.length === 0) {
-    console.log('hello');
     return (
       <Message time={900000}>
         <div>
