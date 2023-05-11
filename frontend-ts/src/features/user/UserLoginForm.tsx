@@ -51,6 +51,7 @@ const UserLoginForm = ({ redirect = '/' }: Props) => {
                 type="email"
                 placeholder="Enter Email"
                 data-cy="email"
+                data-testid="user-login-email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></Form.Control>
@@ -62,12 +63,13 @@ const UserLoginForm = ({ redirect = '/' }: Props) => {
                 type="password"
                 placeholder="Enter Password"
                 data-cy="password"
+                data-testid="user-login-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary" data-testid="submit-btn">
               Sign In
             </Button>
           </Form>

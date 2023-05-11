@@ -73,13 +73,14 @@ const UserProfileForm = () => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)} data-testid="profile-form">
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="name"
             placeholder="Enter Name"
             data-cy="form-name"
+            data-testid="user-profile-name"
             {...register('name', { required: false })}
           ></Form.Control>
         </Form.Group>
@@ -90,6 +91,7 @@ const UserProfileForm = () => {
             type="email"
             placeholder="Enter Email"
             data-cy="form-email"
+            data-testid="user-profile-email"
             {...register('email', { required: false })}
           ></Form.Control>
         </Form.Group>
@@ -117,6 +119,7 @@ const UserProfileForm = () => {
           variant="primary"
           className="btn-block"
           data-cy="btn-update"
+          data-testid="submit-btn"
           disabled={isLoadingUpdateUser}
         >
           Update

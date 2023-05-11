@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 import ErrorMessage from '../../components/ErrorMessage';
+import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 
 import {
@@ -75,42 +76,50 @@ const UserEditForm = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Form.Group controlId="name">
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          type="name"
-          placeholder="Name"
-          {...register('name', { required: false })}
-        ></Form.Control>
-      </Form.Group>
+    <>
+      <Form onSubmit={handleSubmit(onSubmit)} data-testid="form">
+        <Form.Group controlId="name">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="name"
+            placeholder="Name"
+            data-testid="name"
+            {...register('name', { required: false })}
+          ></Form.Control>
+        </Form.Group>
 
-      <Form.Group controlId="email" className="py-3">
-        <Form.Label>Email Address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          {...register('email', { required: false })}
-        ></Form.Control>
-      </Form.Group>
+        <Form.Group controlId="email" className="py-3">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            data-testid="email"
+            {...register('email', { required: false })}
+          ></Form.Control>
+        </Form.Group>
 
-      <Form.Group controlId="isadmin">
-        <Form.Check
-          type="checkbox"
-          label="Is Admin"
-          {...register('isAdmin', { required: false })}
-        ></Form.Check>
-      </Form.Group>
+        <Form.Group controlId="isadmin">
+          <Form.Check
+            type="checkbox"
+            label="Is Admin"
+            data-testid="is-admin"
+            {...register('isAdmin', { required: false })}
+          ></Form.Check>
+        </Form.Group>
 
-      {isLoadingUpdate ? (
-        <Loader />
-      ) : (
-        <Button type="submit" variant="primary" className="my-3">
-          Update
-        </Button>
+        {isLoadingUpdate ? (
+          <Loader />
+        ) : (
+          <Button type="submit" variant="primary" className="my-3">
+            Update
+          </Button>
+        )}
+        {isErrorUpdate && <ErrorMessage error={errorUpdate} />}
+      </Form>
+      {dataUpdate && (
+        <Message variant="success">User updated successfully.</Message>
       )}
-      {isErrorUpdate && <ErrorMessage error={errorUpdate} />}
-    </Form>
+    </>
   );
 };
 

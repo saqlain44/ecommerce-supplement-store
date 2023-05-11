@@ -88,6 +88,7 @@ const UserList = () => {
                     className="btn-sm"
                     onClick={() => deleteHandler(user._id)}
                     data-cy={`btn-${user.name.replace(/\s+/g, '')}-delete`}
+                    data-testid={`btn-${user._id}-delete`}
                   >
                     <i className="fas fa-trash"></i>
                   </Button>
