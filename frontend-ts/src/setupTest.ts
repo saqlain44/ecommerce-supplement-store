@@ -9,6 +9,8 @@ import * as trendingBcaa from './features/product/__tests__/data/trendingBcaa.js
 import * as products from './features/cart/__tests__/data/products.json';
 import * as userData from './features/user/__tests__/data/user.json';
 import userList from './features/user/__tests__/data/users';
+import myorders from './features/order/__tests__/data/myorders';
+import orderList from './features/order/__tests__/data/orderlist';
 
 const testUser = {
   _id: '6437c0ada5f5312d5ab69356',
@@ -21,6 +23,7 @@ const testUser = {
 let users = userList;
 
 const server = setupServer(
+  // products
   rest.get('/api/products/latest', (_req, res, ctx) => {
     return res(ctx.json(latestProducts));
   }),
@@ -45,6 +48,7 @@ const server = setupServer(
     return res(ctx.json({}));
   }),
 
+  // users
   rest.post('api/users/login', async (req, res, ctx) => { 
     const body = await req.json();
     return res(ctx.json({
@@ -99,6 +103,16 @@ const server = setupServer(
       email: body.email,
     }));
   }),
+
+  // orders
+  rest.get('api/orders/myorders', async (_req, res, ctx) => { 
+    return res(ctx.json(myorders));
+  }),
+
+  rest.get('api/orders', async (_req, res, ctx) => { 
+    return res(ctx.json(orderList));
+  }),
+
 );
 
 beforeAll(() => server.listen());
