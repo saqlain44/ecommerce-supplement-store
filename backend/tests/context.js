@@ -48,7 +48,7 @@ class Context {
       await Product.deleteMany();
       await User.deleteMany();
 
-      console.log('Data destroyed!'.red.inverse);
+      // console.log('Data destroyed!'.red.inverse);
     } catch (error) {
       console.error(`${error}`.red.inverse);
     }
@@ -67,7 +67,7 @@ class Context {
 
       await Product.insertMany(sampleProducts);
 
-      console.log('Data imported!'.green.inverse);
+      // console.log('Data imported!'.green.inverse);
     } catch (error) {
       console.error(`${error}`.red.inverse);
     }
