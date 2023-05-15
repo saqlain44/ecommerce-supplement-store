@@ -7,7 +7,7 @@ services:
       context: ./compose/local/nginx
       dockerfile: Dockerfile
     ports:
-      - '3050:80'
+      - '3040:80'
 
   backend:
     build:
@@ -21,7 +21,7 @@ services:
       - DB_HOST=db
       - DB_PORT=27017
     ports:
-      - 5000:5000
+      - 8000:8000
     depends_on:
       - db
 
@@ -40,7 +40,7 @@ services:
       - /app/node_modules
       - ./frontend:/app
     environment:
-      - API_HOST=http://backend:5000
+      - API_HOST=http://backend:8000
     ports:
       - 3000:3000
     depends_on:
