@@ -66,6 +66,7 @@ module.exports = () => {
   );
 
   app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+  app.use('/api-docs', express.static(path.join(process.cwd(), 'api-docs')));
 
   // Serve client page
   if (process.env.NODE_ENV === 'production') {
