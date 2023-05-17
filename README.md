@@ -7,13 +7,13 @@ Full-stack web application for ecommerce supplement store.
 
 ## Tech Stack
 
-**Frontend:** React, Redux Toolkit, Bootstrap, TypeScript
+**Frontend:** React, Redux Toolkit, Bootstrap, TypeScript   
 **Backend:** Node, Express, MongoDB 
 
-**Frontend Test:** Vitest with MSW https://mswjs.io/
+**Frontend Test:** Vitest with MSW https://mswjs.io/   
 **Backend Test:** Jest with Supertest 
 
-**Linter:** ESLint
+**Linter:** ESLint   
 **Formatter:** Prettier
 
 **CI:** Github Actions
