@@ -9,17 +9,13 @@
     "test-frontend": "npm test --prefix frontend -- --watchAll=false",
     "test": "concurrently \"npm run test-backend\" \"npm run test-frontend\"",
     "server": "nodemon backend/server",
-    "client": "npm start --prefix frontend",
+    "client": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server-test": "cross-env NODE_ENV=test nodemon backend/server",
-    "client-test": "cross-env BROWSER=none PORT=3006 npm start --prefix frontend",
-    "dev-test": "concurrently \"npm run server-test\" \"npm run client-test\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
     "data-test:import": "cross-env NODE_ENV=test node backend/seeder",
     "data-test:destroy": "cross-env NODE_ENV=test node backend/seeder -d",
-    "build": "cross-env INLINE_RUNTIME_CHUNK=false npm run build --prefix frontend && cp -r ./api-docs ./frontend/build/",
-    "heroku-postbuild": "bash ./build-tasks.sh"
+    "build": "cross-env INLINE_RUNTIME_CHUNK=false npm run build --prefix frontend && cp -r ./api-docs ./frontend/build/"
   },
   "repository": {
     "type": "git",
