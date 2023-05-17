@@ -35,7 +35,7 @@ services:
       dockerfile: ./compose/test/frontend/Dockerfile
     command: /start.sh
     volumes:
-      - /app/node_modules
+      - /usr/src/app/node_modules
       - ./frontend:/usr/src/app
     environment:
       - API_HOST=http://backend:8000

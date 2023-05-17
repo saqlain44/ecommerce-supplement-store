@@ -7,5 +7,5 @@ services:
       dockerfile: ./compose/test_frontend/frontend/Dockerfile
     command: /start.sh
     volumes:
-      - /app/node_modules
+      - /usr/src/app/node_modules
       - ./frontend:/usr/src/app

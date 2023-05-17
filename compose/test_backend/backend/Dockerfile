@@ -11,8 +11,8 @@ COPY ./backend ./backend
 # COPY ./.env ./
 # COPY ./.env.test.local ./
 # Remove mongo uri from env it will set on docker-compose.test.yml file
-RUN sed -i '/MONGO_URI=momgodb:/c\' .env
-RUN sed -i '/MONGO_URI=momgodb:/c\' .env.test.local
+# RUN sed -i '/MONGO_URI=momgodb:/c\' .env
+# RUN sed -i '/MONGO_URI=momgodb:/c\' .env.test.local
 
 COPY ./compose/test_backend/backend/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r$//g' /entrypoint.sh
