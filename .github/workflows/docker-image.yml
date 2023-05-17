@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image for frontend
+      run: ./compose/test_frontend/bin/build.sh
+    - name: Build the Docker image for backend
+      run: ./compose/test_backend/bin/build.sh
+    - name: Run the Docker image for frontend
+      run: ./compose/test_frontend/bin/up.sh
+    - name: Run the Docker image for backend
+      run: ./compose/test_backend/bin/up.sh
