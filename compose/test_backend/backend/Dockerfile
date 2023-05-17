@@ -8,8 +8,8 @@ RUN sed -i '/cypress/c\' package.json
 
 RUN npm install
 COPY ./backend ./backend
-COPY ./.env ./
-COPY ./.env.test.local ./
+# COPY ./.env ./
+# COPY ./.env.test.local ./
 # Remove mongo uri from env it will set on docker-compose.test.yml file
 RUN sed -i '/MONGO_URI=momgodb:/c\' .env
 RUN sed -i '/MONGO_URI=momgodb:/c\' .env.test.local
