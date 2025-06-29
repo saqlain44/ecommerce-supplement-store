@@ -9,7 +9,8 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'git@github.com/saqlain44/ecommerce-app.git'
+         git credentialsId: 'github-ssh', url: 'git@github.com/saqlain44/ecommerce-app.git'
+
       }
     }
 
