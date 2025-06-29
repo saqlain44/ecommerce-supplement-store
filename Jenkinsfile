@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/saqlain44/ecommerce-app.git'
+        git 'git@github.com/saqlain44/ecommerce-app.git'
       }
     }
 
