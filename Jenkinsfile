@@ -7,12 +7,6 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-         git credentialsId: 'Githubpass', url: 'git@github.com/saqlain44/ecommerce-app.git'
-
-      }
-    }
 
     stage('Build Docker Images') {
       steps {
